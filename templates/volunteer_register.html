@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolunEase</title>
+    <link rel="stylesheet" href="static/styles/common.css">
+    <link rel="stylesheet" href="static/styles/header.css">
+    <link rel="stylesheet" href="static/styles/container.css">
+    <link rel="stylesheet" href="static/styles/footer.css">
+    <link rel="stylesheet" href="static/styles/volunteer_register.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo_image"></div>
+        <h1>VolunEase</h1>
+      </div>
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="landing_page.html">Home</a></li>
+          <li><a href="about_us.html">About Us</a></li>
+          <li><a href="event_list.html">Events</a></li>
+          <li><a href="volunteer_list.html">Volunteers</a></li>
+          <li class="dropdown">
+            <a href="#">Account</a>
+            <div class="dropdown-content">
+              <a href="log_in.html">Log In</a>
+              <a href="registration.html">Register</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="registration-container">
+    <form class="registration-form">
+      <fieldset class="name-fieldset">
+        <legend>Volunteer Name</legend>
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+        </div>
+        <div class="form-group">
+          <label for="secondName">Second Name:</label>
+          <input type="text" id="secondName" name="secondName" placeholder="Enter your second name" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+        </div>
+      </fieldset>
+
+      <fieldset class="info-fieldset">
+        <legend>Volunteer Information</legend>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number:</label>
+          <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="occupation">Occupation:</label>
+          <input type="text" id="occupation" name="occupation" placeholder="Enter your occupation">
+        </div>
+        <div class="form-group">
+          <label for="dob">Date of Birth:</label>
+          <input type="date" id="dob" name="dob" required>
+        </div>
+      </fieldset>
+
+      <fieldset class="image-fieldset">
+        <legend>Insert Image</legend>
+        <div class="form-group">
+          <label for="image">Choose Image:</label>
+          <input type="file" id="image" name="image" accept="image/*" required>
+        </div>
+      </fieldset>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; All rights reserved.</p>
+  </footer>
+  <script src="static/styles/js/script.js"></script>
+
+</body>
+</html>

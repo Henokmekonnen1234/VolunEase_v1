@@ -1,0 +1,131 @@
+/* Add this CSS to the existing styles.css file */
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .Volunter_container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  fieldset {
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    }
+.event-participation-fieldset {
+    overflow: auto; 
+    max-height: 200px;
+}
+.event-participation-fieldset::-webkit-scrollbar {
+    width: 0.5em;
+  }
+
+  .event-participation-fieldset::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+  }
+  
+  legend {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .volunteer-info-fieldset {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  
+  .volunteer-image {
+    width: 30%;
+  }
+  
+  .volunteer-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .volunteer-details {
+    width: 65%;
+  }
+  
+  .full-name,
+  .phone-number,
+  .email,
+  .gender,
+  .occupation {
+    margin: 5px 0;
+  }
+  
+  .participation-hours-fieldset,
+  .event-participation-fieldset {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .event-participation-fieldset {
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  
+  .table-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    table-layout: fixed; /* Fixed table layout to allow width adjustment */
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  
+  .total-hours {
+    margin: 10px 0;
+  }
+
+  /* .table-container {
+    width: 100%;
+    overflow-x: auto;
+    max-height: 100%;
+    
+ }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+  
+  .total-hours {
+    margin: 10px 0;
+  }
+   */

@@ -1,0 +1,78 @@
+header {
+	background-color: #2ecc71;
+	color: #fff;
+	padding: 10px 0;
+  }
+  
+  .header-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 100%;
+	margin: 0 auto;
+	overflow: auto
+
+  }
+  
+  .logo{
+	display: flex;
+	flex-direction: row;
+  }
+
+  .logo_image {
+	width: 150px;
+	height: 80px;
+	margin-left: 30px;
+	background-image: url("../images/VE.png");
+	background-repeat: no-repeat;
+	background-position: center;
+  }
+  
+  nav {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-right: 70px;
+  }
+  
+  nav ul {
+	list-style: none;
+	display: flex;
+  }
+  
+  nav li {
+	margin-right: 20px;
+	font-size: 20px;
+
+  }
+  
+  nav a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+	font-size: 25px;
+  }
+  
+  .dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #333;
+	min-width: 160px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	z-index: 1;
+  }
+  
+  .dropdown-content a {
+	color: #fff;
+	padding: 12px 16px;
+	text-decoration: none;
+	display: block;
+  }
+  
+  .dropdown-content a:hover {
+	background-color: #555;
+  }
+  
+  .dropdown:hover .dropdown-content {
+	display: block;
+  }

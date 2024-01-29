@@ -1,45 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VolunEase</title>
-    <link rel="stylesheet" href="static/styles/common.css">
-    <link rel="stylesheet" href="static/styles/header.css">
-    <link rel="stylesheet" href="static/styles/container.css">
-    <link rel="stylesheet" href="static/styles/footer.css">
-</head>
-<body>
-
-  <header>
-    <div class="header-container">
-      <div class="logo">
-        <div class="logo_image"></div>
-        <h1>VolunEase</h1>
-      </div>
-      <div class="menu-icon" id="menuIcon">&#9776;</div>
-      <nav id="mainNav">
-        <ul>
-          <li><a href="landing_page.html">Home</a></li>
-          <li><a href="about_us.html">About Us</a></li>
-          <li><a href="event_list.html">Events</a></li>
-          <li><a href="volunteer_list.html">Volunteers</a></li>
-          <li class="dropdown">
-            <a href="#">Account</a>
-            <div class="dropdown-content">
-              <a href="log_in.html">Log In</a>
-              <a href="registration.html">Register</a>
-            </div>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <div class="container">
-    <section class="about-section">
-      <div class="left">
-        <h1>VolunEase Volunter Managment System</h1>
+	<head>
+		<title>VolunEase</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="shortcut icon" href="images/icon.ico" >
+		<link rel="stylesheet" href="static/styles/common.css"/>
+		<link rel="stylesheet" href="static/styles/header.css"/>
+		<link rel="stylesheet" href="static/styles/footer.css"/>
+		<link rel="stylesheet" href="static/styles/container.css"/>
+	</head>
+    <body>
+		<header>
+			<div id="header_logo"></div>
+			<h1>VolunEase</h1>
+			<div class="links">
+				<a href="#">Home</a>
+				<a href="#">About Us</a>
+				<a href="#">Events</a>
+				<a href="#">Volunteers</a>
+				<a href="#">Log In</a>
+			</div>
+		</header>
+		<div class="container">
+			<div class="left_side">
+				<h1>VolunEase Volunter Managment System</h1>
 				<h3>Empowering Volunteers, Streamlining Impact</h3>
 				<h4>Are you ready to make a difference? VolunEase is your platform for connecting
 					volunteers and organizations seamlessly. We believe in the power of community
@@ -51,15 +35,14 @@
 				<h3>Get started now and be part of something bigger.
 					 VolunEase - Where Every Volunteer Matters.</h3>
 				<div class="register"><button>Register</button></div>
-      </div>
-      <div class="right">
-        <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="About VolunEase">
-      </div>
-    </section>
-
-    <section class="features-section">
-      <div class="left">
-        <h1>Why VolunEase?</h1>
+			</div>
+			<div class="right_side">
+				<div id="image"></div>
+			</div>
+		</div>
+		<div class="container_below">
+			<div class="left_side_below">
+				<h1>Why VolunEase?</h1>
 				<h4>
 					<ul>
 						<li>User-Friendly: We understand the importance of a simple and intuitive 
@@ -75,9 +58,10 @@
 							changemakers.</li>
 					</ul>
 				</h4>
-      </div>
-      <div class="right">
-        <h1>How VolunEase Works</h1>
+			</div>
+		
+			<div class="right_side_below">
+				<h1>How VolunEase Works</h1>
 				<h4>
 					<ul>
 						<li><strong>Volunteer List Page</strong>: Easily manage and view the details of your volunteers.
@@ -91,14 +75,10 @@
 						</li>
 					</ul>
 				</h4>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    <p>&copy; All rights reserved.</p>
-  </footer>
-  <script src="static/styles/js/script.js"></script>
-
-</body>
+			</div>
+		</div>
+		<footer>
+			<p>© 2024 VolunEase. All rights reserved.</p>
+		</footer>
+	</body>
 </html>

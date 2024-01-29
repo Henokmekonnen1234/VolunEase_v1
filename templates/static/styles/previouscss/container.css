@@ -1,0 +1,98 @@
+.container {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 20px auto auto auto;
+    border: 1px none black;
+    border-radius: 4px;
+    background-color: #3498db;
+}
+
+.left_side {
+    display: flex;
+    flex-direction: column;
+}
+
+.left_side h1 {
+    margin: 50px 20px 5px 20px;   
+}
+
+.left_side h3 {
+    margin: 5px 20px 15px 20px;   
+}
+
+.left_side h4 {
+    margin: 5px 20px 10px 20px;   
+}
+
+#join {
+    margin: 10px 20px 5px 20px;
+}
+
+.right_side {
+    display: flex;
+    flex: 1 1 auto;
+    margin: auto;
+}
+
+#image {
+    margin-right: 15px;
+    width: 500px;
+    height: 500px;
+    background-image: url("../images/portrait-of-volunteers-pointing-at-t-shirt.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.register {
+    margin: auto;
+}
+
+.register button {
+    width: 100px;
+    height: 40px;
+    border: 4px none black;
+    border-radius: 6px;
+    background-color: aquamarine;
+}
+
+.container_below {
+    display:flex;
+    flex-direction: row;
+    margin: 50px;
+    border: 1px none black;
+    border-radius: 4px;
+    background-color:whitesmoke;
+}
+
+.left_side_below {
+    margin:auto;
+}
+
+.left_side_below h1 {
+    margin: 20px;
+}
+
+.left_side_below h4 {
+    margin: 20px;
+}
+
+.left_side_below h4 ul li {
+    margin: 20px;
+}
+
+.right_side_below {
+    margin:auto;
+}
+
+.right_side_below h1 {
+    margin: 20px;
+}
+
+.right_side_below h4 {
+    margin: 20px;
+}
+
+.right_side_below h4 ul li {
+    margin: 20px;
+}

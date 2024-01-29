@@ -1,0 +1,196 @@
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #2ecc71;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+
+nav li {
+  margin-right: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #333;
+  min-width: 160px;
+}
+
+.dropdown-content a {
+  color: #fff;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.about-section,
+.features-section {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 40px;
+  background-color: aqua;
+}
+
+.about-section img,
+.features-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+footer {
+  background-color: #34495e;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+/* Mobile Styles */
+@media only screen and (max-width: 600px) {
+  .menu-icon {
+    display: block;
+    order: 1;
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 5px;
+  }
+
+  #mainNav ul {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    background-color: #333;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+  }
+
+  #mainNav.show ul {
+    display: flex;
+  }
+
+  #mainNav li {
+    margin: 0;
+  }
+
+  #mainNav a {
+    padding: 15px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+}
+
+
+
+/* Add this CSS to the existing styles.css file */
+
+/* Mobile Styles */
+/*
+@media only screen and (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  nav {
+    order: 2; /* Move the nav below the logo in the mobile view */
+  
+/*
+}
+  nav ul {
+    display: none; /* Hide the navigation links by default */
+  /*  flex-direction: column;
+    text-align: center;
+    background-color: #333;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+  }
+
+  nav li {
+    margin: 0;
+  }
+
+  nav a {
+    padding: 15px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .menu-icon {
+    display: block;
+    order: 1;
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 5px;
+  }
+
+  .menu-icon:hover + ul {
+    display: flex; /* Show the navigation links when the icon is hovered */
+  /*}
+}
+*/

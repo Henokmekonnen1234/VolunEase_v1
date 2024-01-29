@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolunEase</title>
+    <link rel="stylesheet" href="static/styles/common.css">
+    <link rel="stylesheet" href="static/styles/header.css">
+    <link rel="stylesheet" href="static/styles/container.css">
+    <link rel="stylesheet" href="static/styles/footer.css">
+    <link rel="stylesheet" href="static/styles/registration.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo_image"></div>
+        <h1>VolunEase</h1>
+      </div>
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="landing_page.html">Home</a></li>
+          <li><a href="about_us.html">About Us</a></li>
+          <li><a href="event_list.html">Events</a></li>
+          <li><a href="volunteer_list.html">Volunteers</a></li>
+          <li class="dropdown">
+            <a href="#">Account</a>
+            <div class="dropdown-content">
+              <a href="log_in.html">Log In</a>
+              <a href="registration.html">Register</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="registration-container">
+    <form class="registration-form">
+      <h2>VolunEase Registration</h2>
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your organization name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="website">Website:</label>
+        <input type="url" id="website" name="website" placeholder="Enter your website URL">
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Choose a username" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="confirm-password">Confirm Password:</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+      </div>
+
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" placeholder="Enter your address"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Image or Logo:</label>
+        <input type="file" id="image" name="image" accept="image/*">
+      </div>
+
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" placeholder="Enter a brief description"></textarea>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; All rights reserved.</p>
+  </footer>
+  <script src="static/styles/js/script.js"></script>
+
+</body>
+</html>

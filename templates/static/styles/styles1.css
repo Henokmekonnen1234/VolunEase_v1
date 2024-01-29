@@ -1,0 +1,51 @@
+/* Add this CSS to the existing styles.css file */
+
+/* ... previous styles ... */
+
+/* Mobile Styles */
+@media only screen and (max-width: 600px) {
+  .menu-icon {
+    display: block;
+    order: 1;
+    cursor: pointer;
+    font-size: 24px;
+    margin-top: 5px;
+  }
+
+  #mainNav ul {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    background-color: #333;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+  }
+
+  #mainNav.show ul {
+    display: flex;
+  }
+
+  #mainNav li {
+    margin: 0;
+  }
+
+  #mainNav a {
+    padding: 15px;
+    display: block;
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+  }
+
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+}

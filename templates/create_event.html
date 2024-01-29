@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolunEase</title>
+    <link rel="stylesheet" href="static/styles/common.css">
+    <link rel="stylesheet" href="static/styles/header.css">
+    <link rel="stylesheet" href="static/styles/container.css">
+    <link rel="stylesheet" href="static/styles/footer.css">
+    <link rel="stylesheet" href="static/styles/create_event.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo_image"></div>
+        <h1>VolunEase</h1>
+      </div>
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="landing_page.html">Home</a></li>
+          <li><a href="about_us.html">About Us</a></li>
+          <li><a href="event_list.html">Events</a></li>
+          <li><a href="volunteer_list.html">Volunteers</a></li>
+          <li class="dropdown">
+            <a href="#">Account</a>
+            <div class="dropdown-content">
+              <a href="log_in.html">Log In</a>
+              <a href="registration.html">Register</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="event_container">
+    <form class="create-event-form">
+      <fieldset class="create-event-fieldset">
+        <legend>Create Event</legend>
+        
+        <fieldset class="event-info-fieldset">
+          <legend>Event Information</legend>
+          <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter event title" required>
+          </div>
+          <div class="form-group">
+            <label for="place">Place:</label>
+            <input type="text" id="place" name="place" placeholder="Enter event place" required>
+          </div>
+          <div class="form-group">
+            <label for="startTime">Starting Time:</label>
+            <input type="datetime-local" id="startTime" name="startTime" required>
+          </div>
+          <div class="form-group">
+            <label for="endTime">End Time:</label>
+            <input type="datetime-local" id="endTime" name="endTime" required>
+          </div>
+          <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" placeholder="Enter event description" required></textarea>
+          </div>
+          <!-- Add these changes to your existing HTML file -->
+
+<!-- Add a new div to hold the multiple-choice input for Volunteer ID -->
+<div class="form-group">
+    <label for="volunteerId">Volunteer ID:</label>
+    <select id="volunteerId" name="volunteerId" multiple required>
+      <!-- Add options dynamically using JavaScript -->
+    </select>
+  </div>
+  </fieldset>
+        
+        <button type="submit">Create Event</button>
+      </fieldset>
+    </form>
+  </div>
+
+
+  <footer>
+    <p>&copy; All rights reserved.</p>
+  </footer>
+  <script src="static/styles/js/script.js"></script>
+
+</body>
+</html>

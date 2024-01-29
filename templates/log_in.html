@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VolunEase</title>
+    <link rel="stylesheet" href="static/styles/common.css">
+    <link rel="stylesheet" href="static/styles/header.css">
+    <link rel="stylesheet" href="static/styles/container.css">
+    <link rel="stylesheet" href="static/styles/footer.css">
+    <link rel="stylesheet" href="static/styles/log_in.css">
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo_image"></div>
+        <h1>VolunEase</h1>
+      </div>
+      <div class="menu-icon" id="menuIcon">&#9776;</div>
+      <nav id="mainNav">
+        <ul>
+          <li><a href="landing_page.html">Home</a></li>
+          <li><a href="about_us.html">About Us</a></li>
+          <li><a href="event_list.html">Events</a></li>
+          <li><a href="volunteer_list.html">Volunteers</a></li>
+          <li class="dropdown">
+            <a href="#">Account</a>
+            <div class="dropdown-content">
+              <a href="log_in.html">Log In</a>
+              <a href="registration.html">Register</a>
+            </div>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="login-container">
+    <form class="login-form">
+      <h2>VolunEase Login</h2>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+      <button type="submit">Login</button>
+      <p class="forgot-password">Forgot your password? <a href="#">Reset it here</a></p>
+    </form>
+  </div>
+
+  <footer>
+    <p>&copy; All rights reserved.</p>
+  </footer>
+  <script src="static/styles/js/script.js"></script>
+
+</body>
+</html>
