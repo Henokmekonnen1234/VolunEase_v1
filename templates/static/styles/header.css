@@ -2,6 +2,9 @@ header {
 	background-color: #2ecc71;
 	color: #fff;
 	padding: 10px 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
   }
   
   .header-container {
