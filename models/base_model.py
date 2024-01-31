@@ -7,11 +7,12 @@ file.
 """
 
 from datetime import datetime
-from uuid import uuid4
+from models import storage
 from sqlalchemy import Column, String, DateTime
 from sqlalchemy.ext.declarative import decralative_base
+from uuid import uuid4
 
-
+time = "%Y-%m-%dT%H:%M:%S.%f"
 Base = decralative_base()
 
 
@@ -43,14 +44,29 @@ class BaseModel:
             for key, value in kwargs.items():
                 setattr(self, key, value)
 
-    def save():
-        pass
+    def save(self):
+        """This will send the object to be saved"""
+        storage.new(self)
+        storage.save()
 
-    def to_dict():
-        pass
+    def to_dict(self):
+        """This method will change class instance to dictionary"""
+        to_dict = self.__dict__.copy()
+        to_dict["__class__"] = self.__class__.__name__
+        if "created_at" in to_dict:
+            to_dict["created_at"] = to_dict["created_at"].strftime(time)
+        if "updated_at" in to_dict:
+            to_dict["updated_at"] = to_dict["updated_at"].strftime(time)
+        if "_sa_instance_state" in to_dict:
+            del to_dict["_sa_instance_state"]
+        if "password" in to_dict:
+            del to_dict["password"]
+        return to_dict         
 
     def str():
-        pass
-
+        """This method will be used to represent the class in string
+        format
+        """
+        
     def delete():
         pass

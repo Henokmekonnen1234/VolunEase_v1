@@ -10,7 +10,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, DateTime, ForeignKey
 
 
-class Organization(BaseModel, Base):
+class Event(BaseModel, Base):
     """this class contain class instnaces for this class"""
     __tablename__ = "events"
     title = Column(String(255), nullable=False)

@@ -18,5 +18,5 @@ class Organization(BaseModel, Base):
     image = Column(String(255), nullable=True)
     website = Column(String(128), nullable=False, unique=True)
     address = Column(String(255), nullable=False)
-    legal_document = Column(String(255), nullable=False)
+    legal_document = Column(String(255), nullable=True)
     description = Column(String(255), nullable=False, unique=True)
