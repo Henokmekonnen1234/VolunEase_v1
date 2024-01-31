@@ -53,20 +53,24 @@ class BaseModel:
         """This method will change class instance to dictionary"""
         to_dict = self.__dict__.copy()
         to_dict["__class__"] = self.__class__.__name__
-        if "created_at" in to_dict:
-            to_dict["created_at"] = to_dict["created_at"].strftime(time)
-        if "updated_at" in to_dict:
-            to_dict["updated_at"] = to_dict["updated_at"].strftime(time)
+        if "created_date" in to_dict:
+            to_dict["created_date"] = to_dict["created_date"
+                                              ].strftime(time)
+        if "updated_date" in to_dict:
+            to_dict["updated_date"] = to_dict["updated_date"
+                                              ].strftime(time)
         if "_sa_instance_state" in to_dict:
             del to_dict["_sa_instance_state"]
         if "password" in to_dict:
             del to_dict["password"]
         return to_dict         
 
-    def str():
+    def __str__(self):
         """This method will be used to represent the class in string
         format
         """
-        
-    def delete():
-        pass
+        return f"[{self.__class__.__name__}] ({self.id}) {self.to_dict()}"
+    
+    def delete(self):
+        "This method will delete the class"
+        storage.delete(self)
