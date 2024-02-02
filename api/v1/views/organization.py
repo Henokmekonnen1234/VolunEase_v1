@@ -74,17 +74,15 @@ def dashboard():
     if not token:
         return jsonify({'message': 'Missing token'}), 401
 
-    try:
-        org_id = jwt_decode(token, app.config["SECRET_KEY"])
-        org = storage.get(Organization, org_id)
-        event = [value.to_dict() for value in storage.all(Event).values()]
-        volunteer = [value.to_dict() for value in storage.all(Volunteer).values()]
-        if org:
-            return jsonify({"org": org.to_dict(), "event": event,
-                            "volunteer": volunteer})
-        else:
-            return jsonify({'message': 'Invalid user'}), 401
-    except jwt.ExpiredSignatureError:
-        return jsonify({'message': 'Token has expired'}), 401
-    except jwt.InvalidTokenError:
-        return jsonify({'message': 'Invalid token'}), 401
+    org_id = jwt_decode(token, app.config["SECRET_KEY"])
+    org = storage.get(Organization, org_id)
+    event = [value.to_dict() for value in storage.all(Event).values()
+             if value.org_id == org.id]
+    volunteer = [value.to_dict() for value in storage.all(Volunteer).values()
+                 if value.org_id == org.id]
+    if org:
+        return jsonify({"org": org.to_dict(), "event": event,
+                        "volunteer": volunteer})
+    else:
+        return jsonify({'message': 'Invalid user'}), 401
+    

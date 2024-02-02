@@ -38,12 +38,15 @@ def jwt_encode(value=None, secret=None):
 def jwt_decode(value=None, secret=None):
     """This method will decode the JWT"""
     from api.v1.app import app
-    if value and secret:
-        tokens = jwt.decode(value, secret, algorithms=['HS256'])
-        org_id = tokens["id"]
-        return org_id
-    else:
-        return value
+    try:
+        if value and secret:
+            tokens = jwt.decode(value, secret, algorithms=['HS256'])
+            org_id = tokens["id"]
+            return org_id
+    except jwt.ExpiredSignatureError:
+        return None
+    except jwt.InvalidTokenError:
+        return None
     
 def taken_value(cls, **kwargs):
     """This method will check if the value is present in the saved 
