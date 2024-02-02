@@ -18,6 +18,10 @@ class Event(BaseModel, Base):
     start_time = Column(DateTime, nullable=False)
     end_time = Column(DateTime, )
     image = Column(String(255), nullable=True)
-    org_id = Column(String(60), ForeignKey("organization.id"),
+    org_id = Column(String(60), ForeignKey("organizations.id"),
                     nullable=False)
-    description = Column(String(255), nullable=False, unique=True)
+    description = Column(String(500), nullable=False, unique=True)
+
+    def __init__(self, *args, **kwargs):
+        """initializes city"""
+        super().__init__(*args, **kwargs)

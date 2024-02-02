@@ -5,18 +5,25 @@ Module volunteer.py
 In this module volunteer data is found
 """
 
-from sqlalchemy import Column, String
 from models.base_model import BaseModel, Base
+from sqlalchemy import Column, ForeignKey, String 
 
 
 class Volunteer(BaseModel, Base):
     """this class contain class instnaces for this class"""
     __tablename__ = "volunteers"
-    first_name = Column(String(255), nullable=False, unique=True)
-    mid_name = Column(String(255), nullable=False, unique=True)
-    last_name = Column(String(255), nullable=False, unique=True)
+    first_name = Column(String(255), nullable=False)
+    mid_name = Column(String(255), nullable=False)
+    last_name = Column(String(255), nullable=False)
     email = Column(String(128), nullable=False, unique=True)
     image = Column(String(255), nullable=True)
     phone_no = Column(String(30), nullable=False, unique=True)
-    occupation = Column(String(50), nullable=False, unique=True)
-    gender = Column(String(2), nullable=False, unique=True)
+    occupation = Column(String(50), nullable=False)
+    gender = Column(String(2), nullable=False)
+    org_id = Column(String(60), ForeignKey("organizations.id"),
+                    nullable=False)
+    
+
+    def __init__(self, *args, **kwargs):
+        """initializes city"""
+        super().__init__(*args, **kwargs)

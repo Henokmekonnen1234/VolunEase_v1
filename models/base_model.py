@@ -7,13 +7,13 @@ file.
 """
 
 from datetime import datetime
-from models import storage
+import models
 from sqlalchemy import Column, String, DateTime
-from sqlalchemy.ext.declarative import decralative_base
+from sqlalchemy.ext.declarative import declarative_base
 from uuid import uuid4
 
 time = "%Y-%m-%dT%H:%M:%S.%f"
-Base = decralative_base()
+Base = declarative_base()
 
 
 class BaseModel:
@@ -40,14 +40,21 @@ class BaseModel:
             self.id = uuid4()
             self.created_date = datetime.utcnow()
             self.updated_date = datetime.utcnow()
+            for key, value in kwargs.items():
+                if "start_time" == key or "end_time" == key:
+                    print(value)
+                    value = datetime.strptime(value, time)
+                setattr(self, key, value)
         elif kwargs:
             for key, value in kwargs.items():
+                if "created_date" == key or "updated_date" == key:
+                    value = datetime.strptime(value, time)
                 setattr(self, key, value)
 
     def save(self):
         """This will send the object to be saved"""
-        storage.new(self)
-        storage.save()
+        models.storage.new(self)
+        models.storage.save()
 
     def to_dict(self):
         """This method will change class instance to dictionary"""
@@ -61,8 +68,8 @@ class BaseModel:
                                               ].strftime(time)
         if "_sa_instance_state" in to_dict:
             del to_dict["_sa_instance_state"]
-        if "password" in to_dict:
-            del to_dict["password"]
+        # if "password" in to_dict:
+        #     del to_dict["password"]
         return to_dict         
 
     def __str__(self):
@@ -73,4 +80,4 @@ class BaseModel:
     
     def delete(self):
         "This method will delete the class"
-        storage.delete(self)
+        models.storage.delete(self)

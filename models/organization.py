@@ -6,6 +6,7 @@ In this module organization data is found
 """
 
 from sqlalchemy import Column, String
+from sqlalchemy.orm import relationship
 from models.base_model import BaseModel, Base
 
 
@@ -14,9 +15,18 @@ class Organization(BaseModel, Base):
     __tablename__ = "organizations"
     name = Column(String(128), nullable=False, unique=True)
     email = Column(String(128), nullable=False, unique=True)
+    password  = Column(String(255), nullable=False)
     phone_no = Column(String(30), nullable=False, unique=True)
     image = Column(String(255), nullable=True)
     website = Column(String(128), nullable=False, unique=True)
     address = Column(String(255), nullable=False)
     legal_document = Column(String(255), nullable=True)
-    description = Column(String(255), nullable=False, unique=True)
+    description = Column(String(500), nullable=False, unique=True)
+    events = relationship("Event", backref="organizations",
+                          cascade="all, delete, delete-orphan")
+    volunteers =  relationship("Volunteer", backref="organizations",
+                               cascade="all, delete, delete-orphan")
+    
+    def __init__(self, *args, **kwargs):
+        """initializes city"""
+        super().__init__(*args, **kwargs)

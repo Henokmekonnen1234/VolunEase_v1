@@ -27,15 +27,15 @@ class DBStorage:
 
     def __init__(self):
         """This method will initialize the instances"""
-        MYSQL_USER = getenv('HBNB_MYSQL_USER')
-        MYSQL_PWD = getenv('HBNB_MYSQL_PWD')
-        MYSQL_HOST = getenv('HBNB_MYSQL_HOST')
-        MYSQL_DB = getenv('HBNB_MYSQL_DB')
+        MYSQL_USER = getenv('MYSQL_USER')
+        MYSQL_PWD = getenv('MYSQL_PWD')
+        MYSQL_HOST = getenv('MYSQL_HOST')
+        MYSQL_DB = getenv('MYSQL_DB')
         self.__engine = create_engine('mysql+mysqldb://{}:{}@{}/{}'.
-                                      format(HBNB_MYSQL_USER,
-                                             HBNB_MYSQL_PWD,
-                                             HBNB_MYSQL_HOST,
-                                             HBNB_MYSQL_DB))
+                                      format(MYSQL_USER,
+                                             MYSQL_PWD,
+                                             MYSQL_HOST,
+                                             MYSQL_DB))
         if getenv("ENV") == "test":
             Base.metadata.drop_all(self.__engine)
 
@@ -88,6 +88,16 @@ class DBStorage:
                 return value
 
         return None
+
+    def filter(self, cls, column_name, value):
+        """This will filter the values of the class"""
+        value = self.__session().query(cls).filter(getattr(cls, column_name
+                                                           ) == value)\
+                .first()
+        if value is not None:
+            return value
+        else:
+            return None
 
     def count(self, cls=None):
         """
