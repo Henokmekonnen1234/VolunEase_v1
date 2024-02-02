@@ -3,12 +3,12 @@
 Volunteer"""
 from models.volunteer import Volunteer
 from models.organization import Organization
+from models.event import Event
 from models import storage
 from models.utility import taken_value
 from models.utility import jwt_decode
 from api.v1.views import app_views
 from flask import jsonify, request, abort, make_response
-import logging
 
 @app_views.route("/volunteers", methods=["GET"], strict_slashes=False)
 def get_volunteers():
@@ -71,11 +71,16 @@ def get_volunteer(id=None):
         if org_id is None:
              return jsonify("Invalid Token, please log in again"), 401
         org = storage.get(Organization, org_id)
+        events = storage.all(Event).values()
         volunteer =  storage.get(Volunteer, id)
+        sum = 0
         if org and volunteer:
             if volunteer.org_id == org.id:
-                logging.info(volunteer)
-                return jsonify(volunteer.to_dict())
+                for values  in events:
+                    for value in values.volunteers:
+                        if volunteer.id == value.id:
+                            sum += value.part_time
+                return jsonify(volunteer.to_dict(), sum)
             else:
                  return jsonify("Error occured"), 401
 
