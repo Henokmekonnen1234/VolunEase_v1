@@ -32,7 +32,7 @@ class Event(BaseModel, Base):
     image = Column(String(255), nullable=True)
     org_id = Column(String(60), ForeignKey("organizations.id"),
                     nullable=False)
-    description = Column(String(500), nullable=False, unique=True)
+    description = Column(String(500), nullable=False, unique=False)
     volunteers = relationship("Volunteer", secondary=event_student,
                               viewonly=False)
 

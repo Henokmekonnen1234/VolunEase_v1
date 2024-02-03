@@ -72,7 +72,7 @@ def get_volunteer(id=None):
              return jsonify("Invalid Token, please log in again"), 401
         org = storage.get(Organization, org_id)
         events = storage.all(Event).values()
-        volunteer =  storage.get(Volunteer, id)
+        volunteer =  storage.get(Volunteer,  id)
         sum = 0
         if org and volunteer:
             if volunteer.org_id == org.id:
@@ -80,9 +80,11 @@ def get_volunteer(id=None):
                     for value in values.volunteers:
                         if volunteer.id == value.id:
                             sum += value.part_time
-                return jsonify(volunteer.to_dict(), sum)
+                return jsonify({"volunteer": volunteer.to_dict(),"part_time": sum})
             else:
                  return jsonify("Error occured"), 401
+        else:
+            return jsonify("org and volunteer not found"), 401
 
 
 @app_views.route("/volunteers/<id>", methods=["DELETE"], strict_slashes=False)
@@ -106,3 +108,29 @@ def delete_volunteer(id):
             return jsonify("successfuly deleted", id)
         else:
             abort(404)
+
+
+@app_views.route("/volunteers/<id>", methods=["PUT"], strict_slashes=False)
+def update_volunteer(id=None):
+    """This method will update the volunteer data"""
+    from api.v1.app import app
+    token = request.headers.get("Authorization")
+    if not token:
+        return make_response(jsonify({"message": "token not found"}), 401)
+    if not id:
+        return jsonify("value is not found"), 401
+    else:
+        org_id = jwt_decode(token, app.config["SECRET_KEY"])
+        if org_id is None:
+             return jsonify("Invalid Token, please log in again"), 401
+        new_dict = request.get_json()
+        new_dict["org_id"] = org_id
+        volunteer = storage.get(Volunteer, new_dict["id"])
+        if not volunteer:
+            return jsonify("value is not found"), 401
+        for key, value in new_dict.items():
+            if key != "id":
+                setattr(volunteer, key, value)
+        volunteer.save()
+        print(volunteer.to_dict())
+        return jsonify(volunteer.to_dict())

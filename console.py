@@ -92,6 +92,10 @@ class VECommand(cmd.Cmd):
         print("[", end="")
         print(", ".join(obj_list), end="")
         print("]")
+    
+    def do_hash(self, arg):
+        from models import utility
+        print(utility.encrypt("password"))
 
 if __name__ == '__main__':
     VECommand().cmdloop()

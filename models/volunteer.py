@@ -15,9 +15,9 @@ class Volunteer(BaseModel, Base):
     first_name = Column(String(255), nullable=False, unique=False)
     mid_name = Column(String(255), nullable=False, unique=False)
     last_name = Column(String(255), nullable=False, unique=False)
-    email = Column(String(128), nullable=False, unique=True)
+    email = Column(String(128), nullable=False, unique=False)
     image = Column(String(255), nullable=True, unique=False)
-    phone_no = Column(String(30), nullable=False, unique=True)
+    phone_no = Column(String(30), nullable=False, unique=False)
     occupation = Column(String(50), nullable=False, unique=False)
     gender = Column(String(2), nullable=False, unique=False)
     org_id = Column(String(60), ForeignKey("organizations.id"),

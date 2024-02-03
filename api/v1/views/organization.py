@@ -49,21 +49,22 @@ def log_in():
         else:
             abort(404)
 
-@app_views.route('/organizations/<id>', methods=['DELETE'],
+@app_views.route('/organizations', methods=['DELETE'],
                  strict_slashes=False)
-def delete_organization(id):
+def delete_organization():
     """
     Deletes a Review Object
     """
-
-    org = storage.get(Organization, id)
-
+    from api.v1.app import app
+    token = request.headers.get('Authorization')
+    if not token:
+        return jsonify({'message': 'Missing token'}), 401
+    org_id = jwt_decode(token, app.config["SECRET_KEY"])
+    org = storage.get(Organization, org_id)
     if not org:
         abort(404)
-
     storage.delete(org)
     storage.save()
-
     return make_response(jsonify({"id": id}), 200)
 
 @app_views.route('/dashboard', methods=["GET"], strict_slashes=False)
@@ -86,3 +87,26 @@ def dashboard():
     else:
         return jsonify({'message': 'Invalid user'}), 401
     
+
+@app_views.route("/organizations", methods=["PUT"], strict_slashes=False)
+def update_organization():
+    """This method will update the organization"""
+    from api.v1.app import app
+    token = request.headers.get('Authorization')
+    if not token:
+        return jsonify({'message': 'Missing token'}), 401
+    org_id = jwt_decode(token, app.config["SECRET_KEY"])
+    org = storage.get(Organization, org_id)
+    if org:
+        new_dict =  request.get_json()
+        new_dict["password"] = encrypt(new_dict["password"])
+        for key, value in new_dict.items():
+            if key != "id" or "created_date" != key or\
+                 "updated_date" != key:
+                setattr(org, key, value)
+        org.save()
+        response = make_response(jsonify(org.to_dict()))
+        response.headers["Authorization"] = token
+        return response
+    else:
+        abort(404)

@@ -37,17 +37,18 @@ class BaseModel:
         """this method will initialize the basemodel"""
         if "id" not in kwargs.keys() and "updated_date"\
             not in kwargs.keys():
-            self.id = uuid4()
+            self.id = str(uuid4())
             self.created_date = datetime.utcnow()
             self.updated_date = datetime.utcnow()
             for key, value in kwargs.items():
                 if "start_time" == key or "end_time" == key:
-                    print(value)
                     value = datetime.strptime(value, time)
                 setattr(self, key, value)
         elif kwargs:
+            del kwargs["__class__"]
             for key, value in kwargs.items():
-                if "created_date" == key or "updated_date" == key:
+                if "created_date" == key or "updated_date" == key or\
+                    "start_time" == key or  "end_time" == key:
                     value = datetime.strptime(value, time)
                 setattr(self, key, value)
 
@@ -60,13 +61,23 @@ class BaseModel:
         """This method will change class instance to dictionary"""
         to_dict = self.__dict__.copy()
         to_dict["__class__"] = self.__class__.__name__
-        if "created_date" in to_dict:
+        if "created_date" in to_dict and\
+            type(to_dict.get("created_date")) == datetime:
             to_dict["created_date"] = to_dict["created_date"
                                               ].strftime(time)
-        if "updated_date" in to_dict:
+        if "updated_date" in to_dict and\
+            type(to_dict.get("update_date")) == datetime:
             to_dict["updated_date"] = to_dict["updated_date"
                                               ].strftime(time)
-        if "_sa_instance_state" in to_dict:
+        if "start_time" in to_dict and\
+            type(to_dict.get("update_date")) == datetime:
+            to_dict["start_time"] = to_dict["start_time"
+                                              ].strftime(time)
+        if "end_time" in to_dict and\
+            type(to_dict.get("update_date")) == datetime:
+            to_dict["end_time"] = to_dict["end_time"
+                                              ].strftime(time)
+        if to_dict.get("_sa_instance_state"):
             del to_dict["_sa_instance_state"]
         # if "password" in to_dict:
         #     del to_dict["password"]

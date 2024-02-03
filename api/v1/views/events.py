@@ -22,11 +22,24 @@ def get_events():
         return jsonify("Error occured"), 401
 
 
+@app_views.route("/events/<id>", methods=["GET"], strict_slashes=False)
+def get_event(id=None):
+    """This will return event data using the id"""
+    if not id:
+        return jsonify("value is not provided"), 401
+    event = storage.get(Event, id)
+    if event:
+        volun_list = [value.to_dict() for value in event.volunteers]
+        del event.volunteers
+        return jsonify({"event": event.to_dict(), "volun_list": volun_list})
+
+
 @app_views.route("/events", methods=["POST"], strict_slashes=False)
 def create_event():
     """This method will handle creating posting"""
     from api.v1.app import app
     token = request.headers.get("Authorization")
+    new_dict = request.get_json()
     if not token:
         return jsonify("access_token needed"), 401
     org_id = jwt_decode(token, app.config["SECRET_KEY"])
@@ -34,15 +47,18 @@ def create_event():
         return jsonify("Invalid Token"), 401
     org = storage.get(Organization, org_id)
     if org:
-        new_dict = request.get_json()
         new_dict["org_id"] = org.id
         volun_list = new_dict["volunteers"]
         del new_dict["volunteers"]
         events = Event(**new_dict)
         for volunteer in volun_list:
-            get_volunteer = storage.filter(Volunteer, "id", volunteer)
-            events.volunteers.append(get_volunteer)
+            events.volunteers.append(storage.filter(Volunteer, "id", volunteer))
         events.save()
-        return jsonify({"message": "sucessful creation", "events": events.to_dict()})
+        volun_list = [value.to_dict() for value in events.volunteers]
+        del events.volunteers
+        return jsonify({"message": "sucessful creation",
+                        "events": events.to_dict(),
+                        "volun_list": volun_list})
     else:
         return abort(404)
+    
