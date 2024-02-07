@@ -19,7 +19,7 @@ def get_events():
         event_list = [value.to_dict() for value in events]
         return jsonify(event_list)
     else:
-        return jsonify("Error occured"), 401
+        return jsonify([])
 
 
 @app_views.route("/events/<id>", methods=["GET"], strict_slashes=False)
@@ -53,12 +53,12 @@ def create_event():
         events = Event(**new_dict)
         for volunteer in volun_list:
             events.volunteers.append(storage.filter(Volunteer, "id", volunteer))
+        part_time = events.end_time - events.start_time
+        events.part_time = float(part_time.total_seconds() / 3600.0)
         events.save()
-        volun_list = [value.to_dict() for value in events.volunteers]
         del events.volunteers
         return jsonify({"message": "sucessful creation",
-                        "events": events.to_dict(),
-                        "volun_list": volun_list})
+                        "events": events.to_dict()})
     else:
         return abort(404)
     

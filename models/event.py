@@ -19,8 +19,7 @@ event_student = Table("event_students", Base.metadata,
                       Column("volun_id", String(60),
                              ForeignKey("volunteers.id", onupdate="CASCADE",
                                          ondelete="CASCADE"), nullable=False,
-                                         primary_key=True),
-                     Column("part_time", Float, nullable=True))
+                                         primary_key=True))
 
 class Event(BaseModel, Base):
     """this class contain class instnaces for this class"""
@@ -32,6 +31,7 @@ class Event(BaseModel, Base):
     image = Column(String(255), nullable=True)
     org_id = Column(String(60), ForeignKey("organizations.id"),
                     nullable=False)
+    part_time = Column(Float, nullable=True)
     description = Column(String(500), nullable=False, unique=False)
     volunteers = relationship("Volunteer", secondary=event_student,
                               viewonly=False)

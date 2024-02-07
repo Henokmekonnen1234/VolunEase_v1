@@ -44,9 +44,6 @@ def register_volunteer():
     if org:
         new_data = request.get_json()
         new_data["org_id"] = org.id
-        present = taken_value(Volunteer, **new_data)
-        if present:
-            return jsonify(present), 401
         instance = Volunteer(**new_data)
         instance.save()
         if instance:
@@ -74,13 +71,20 @@ def get_volunteer(id=None):
         events = storage.all(Event).values()
         volunteer =  storage.get(Volunteer,  id)
         sum = 0
+        event_list = []
         if org and volunteer:
             if volunteer.org_id == org.id:
                 for values  in events:
                     for value in values.volunteers:
                         if volunteer.id == value.id:
-                            sum += value.part_time
-                return jsonify({"volunteer": volunteer.to_dict(),"part_time": sum})
+                            event_list.append(values.to_dict())
+                            sum += values.part_time
+                for value in event_list:
+                    if value.get("volunteers"):
+                        del value["volunteers"]
+                return jsonify({"volunteer": volunteer.to_dict(),
+                                "part_time": sum,
+                                "event_list": event_list})
             else:
                  return jsonify("Error occured"), 401
         else:
@@ -129,7 +133,8 @@ def update_volunteer(id=None):
         if not volunteer:
             return jsonify("value is not found"), 401
         for key, value in new_dict.items():
-            if key != "id":
+            if key != "id" or key != "update_date" or\
+                  key != "created_date":
                 setattr(volunteer, key, value)
         volunteer.save()
         print(volunteer.to_dict())
