@@ -38,16 +38,24 @@ def log_in():
     """This method will use to log in to the dashboard"""
     from api.v1.app import app
     new_dict = request.get_json()
+    print(new_dict)
     if new_dict.get("email"):
         org = storage.filter(Organization, "email", new_dict["email"])
         if org:
             if decrypt(new_dict["password"], org.password):
                 token = jwt_encode(org.id, app.config["SECRET_KEY"])
-                return jsonify({"message": "successfull", "orgs": org.to_dict()}, token)
+                response_data = {
+                    "message": "successfull",
+                    "orgs": org.to_dict(),
+                    "token": token
+                }
+                return make_response(jsonify(response_data), 200)
             else:
-                return abort(404)
+                return make_response(jsonify({"error": "Invalid password"}), 401)
         else:
-            abort(404)
+            return make_response(jsonify({"error": "Organization not found"}), 404)
+    else:
+        return make_response(jsonify({"error": "Invalid request data"}), 400)
 
 @app_views.route('/organizations', methods=['DELETE'],
                  strict_slashes=False)

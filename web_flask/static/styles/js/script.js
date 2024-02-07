@@ -8,4 +8,3 @@ document.addEventListener('DOMContentLoaded', function() {
       mainNav.classList.toggle('show');
     });
   });
-  
