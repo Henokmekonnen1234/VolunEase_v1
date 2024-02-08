@@ -80,23 +80,24 @@ def dashboard():
     """This method handeles the request after log_in"""
     from api.v1.app import app
     token = request.headers.get('Authorization')
-    if not token:
-        return jsonify({'message': 'Missing token'}), 401
-
-    org_id = jwt_decode(token, app.config["SECRET_KEY"])
-    org = storage.get(Organization, org_id)
-    events = storage.all(Event).values()
-    events_year = {}
-    volun_year = {}
-    year = []
-    for value in events:
-        if value.created_date.year not in year:
-            year.append(value.created_date.year)
-    
-    if org:
-        return jsonify({"org": org.to_dict()})
+    print(token)
+    if token:
+        org_id = jwt_decode(token, app.config["SECRET_KEY"])
+        org = storage.get(Organization, org_id)
+        events = storage.all(Event).values()
+        events_year = {}
+        volun_year = {}
+        year = []
+        for value in events:
+            if value.created_date.year not in year:
+                year.append(value.created_date.year)
+        
+        if org:
+            return jsonify({"org": org.to_dict()})
+        else:
+            return jsonify({'message': 'Invalid user'}), 401
     else:
-        return jsonify({'message': 'Invalid user'}), 401
+        return jsonify({'message': 'Missing token'}), 401
     
 
 @app_views.route("/organizations", methods=["PUT"], strict_slashes=False)

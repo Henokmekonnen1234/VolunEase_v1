@@ -41,8 +41,7 @@
           <li class="dropdown">
             <a href="#">Account</a>
             <div class="dropdown-content">
-              <a href="{{ url_for('login') }}">Log In</a>
-              <a href="{{ url_for('register') }}">Register</a>
+              <a href="#" id="logout">Log out</a>
             </div>
           </li>
         </ul>
@@ -56,15 +55,15 @@
         <legend>Volunteer Name</legend>
         <div class="form-group">
           <label for="firstName">First Name:</label>
-          <input type="text" id="firstName" name="firstName" placeholder="Enter your first name" required>
+          <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" required>
         </div>
         <div class="form-group">
           <label for="secondName">Second Name:</label>
-          <input type="text" id="secondName" name="secondName" placeholder="Enter your second name" required>
+          <input type="text" id="mid_name" name="mid_name" placeholder="Enter your father name" required>
         </div>
         <div class="form-group">
           <label for="lastName">Last Name:</label>
-          <input type="text" id="lastName" name="lastName" placeholder="Enter your last name" required>
+          <input type="text" id="last_name" name="last_name" placeholder="Enter your grandfather name" required>
         </div>
       </fieldset>
 
@@ -72,7 +71,7 @@
         <legend>Volunteer Information</legend>
         <div class="form-group">
           <label for="phoneNumber">Phone Number:</label>
-          <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" required>
+          <input type="tel" id="phone_no" name="phone_no" placeholder="Enter your phone number" required>
         </div>
         <div class="form-group">
           <label for="email">Email:</label>
@@ -83,18 +82,13 @@
           <select id="gender" name="gender">
             <option value="male">Male</option>
             <option value="female">Female</option>
-            <option value="other">Other</option>
           </select>
         </div>
         <div class="form-group">
           <label for="occupation">Occupation:</label>
           <input type="text" id="occupation" name="occupation" placeholder="Enter your occupation">
         </div>
-        <div class="form-group">
-          <label for="dob">Date of Birth:</label>
-          <input type="date" id="dob" name="dob" required>
-        </div>
-      </fieldset>
+        </fieldset>
 
       <fieldset class="image-fieldset">
         <legend>Insert Image</legend>

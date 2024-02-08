@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="../static/styles/css/header.css">
     <link rel="stylesheet" href="../static/styles/css/container.css">
     <link rel="stylesheet" href="../static/styles/css/footer.css">
-    <link rel="stylesheet" href="static/styles/registration.css">
+    <link rel="stylesheet" href="../static/styles/css/registration.css">
     <link rel='shortcut icon' href="../static/images/VE.png" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../static/styles/js/register.js"></script>
 </head>
 <body>
 
@@ -38,7 +40,7 @@
   </header>
 
   <div class="registration-container">
-    <form class="registration-form">
+    <form class="registration-form" id="registration-form">
       <h2>VolunEase Registration</h2>
 
       <div class="form-group">
@@ -52,28 +54,18 @@
       </div>
 
       <div class="form-group">
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-      </div>
-
-      <div class="form-group">
-        <label for="website">Website:</label>
-        <input type="url" id="website" name="website" placeholder="Enter your website URL">
-      </div>
-
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" placeholder="Choose a username" required>
-      </div>
-
-      <div class="form-group">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Enter your password" required>
       </div>
 
       <div class="form-group">
-        <label for="confirm-password">Confirm Password:</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone_no" name="phone_no" placeholder="Enter your phone number" required>
+      </div>
+
+      <div class="form-group">
+        <label for="website">Website:</label>
+        <input type="text" id="website" name="website" placeholder="Enter your website URL">
       </div>
 
       <div class="form-group">
@@ -84,6 +76,11 @@
       <div class="form-group">
         <label for="image">Image or Logo:</label>
         <input type="file" id="image" name="image" accept="image/*">
+      </div>
+
+      <div class="form-group">
+        <label for="image">Legal Document:</label>
+        <input type="file" id="legal_document" name="legal_document" accept="file/*">
       </div>
 
       <div class="form-group">

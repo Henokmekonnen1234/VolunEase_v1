@@ -2,8 +2,9 @@
 
 $(document).ready(function () {
     const apiUrl = 'http://127.0.0.2:5001/api/v1/dashboard';
+    const apiUrl1 = 'http://127.0.0.1:5000/';
     
-    var token = localStorage.getItem('X-access-token');
+    var token = getCookie('X-access-token');
 
     $.ajax({
         url: apiUrl,
@@ -18,10 +19,24 @@ $(document).ready(function () {
           console.log(data)
         },
         error: function (error) {
+          $(".dashboard-container ").hide()
             console.error('Error:', error);
             // Handle login error (e.g., display an error message)
         }
     });
+
+    function getCookie(name) {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.startsWith(name + '=')) {
+              return cookie.substring(name.length + 1);
+          }
+      }
+      return null;
+  }
+
+  
 });
 
 

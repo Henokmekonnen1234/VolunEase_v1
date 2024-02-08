@@ -20,11 +20,10 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 // Store the token in the local storage
-                localStorage.setItem('X-access-token', data.token);
-
+                console.log("token ",data.token)
+                setCookie('X-access-token', data.token, 30);
                 // Redirect to the dashboard page
                 window.location.href = apiUrl1 + 'dashboard';
-                console.log("token ",data.token)
                 console.log(data.orgs)
             },
             error: function (error) {
@@ -33,13 +32,14 @@ $(document).ready(function () {
             }
         });
     });
+
+    function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    }
+
+
 });
 
 
-document.getElementById('logoutButton').addEventListener('click', function () {
-    // Clear the token from local storage
-    localStorage.removeItem('token');
-
-    // Redirect to the login page
-    window.location.href = '/login';
-});
