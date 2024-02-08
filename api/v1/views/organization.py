@@ -85,13 +85,16 @@ def dashboard():
 
     org_id = jwt_decode(token, app.config["SECRET_KEY"])
     org = storage.get(Organization, org_id)
-    event = [value.to_dict() for value in storage.all(Event).values()
-             if value.org_id == org.id]
-    volunteer = [value.to_dict() for value in storage.all(Volunteer).values()
-                 if value.org_id == org.id]
+    events = storage.all(Event).values()
+    events_year = {}
+    volun_year = {}
+    year = []
+    for value in events:
+        if value.created_date.year not in year:
+            year.append(value.created_date.year)
+    
     if org:
-        return jsonify({"org": org.to_dict(), "event": event,
-                        "volunteer": volunteer})
+        return jsonify({"org": org.to_dict()})
     else:
         return jsonify({'message': 'Invalid user'}), 401
     

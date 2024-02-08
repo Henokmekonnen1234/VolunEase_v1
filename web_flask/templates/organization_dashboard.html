@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../static/styles/css/container.css">
     <link rel="stylesheet" href="../static/styles/css/footer.css">
     <link rel="stylesheet" href="../static/styles/css/dashboard.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="../static/styles/js/dashboard.js"></script>
     <link rel='shortcut icon' href="../static/images/VE.png" />
@@ -43,8 +44,7 @@
           <li class="dropdown">
             <a href="#">Account</a>
             <div class="dropdown-content">
-              <a href="{{ url_for('login') }}">Log In</a>
-              <a href="{{ url_for('register') }}">Register</a>
+              <a href="#" id="logout">Log out</a>
             </div>
           </li>
         </ul>
@@ -55,7 +55,7 @@
   <div class="dashboard-container">
     <div class="header">
       <div class="organization-info">
-        <h1>Organization Name</h1>
+        <h1></h1>
       </div>
       <div class="organization-image">
         <img src="static/images/VE.png" alt="Organization Image">
@@ -71,7 +71,7 @@
       </div>
     </div>
     <div class="description-section">
-      <p>This is the description of the organization. Provide information about the organization and its activities.</p>
+      <p></p>
     </div>
   </div>
 
@@ -82,3 +82,4 @@
 
 </body>
 </html>
+

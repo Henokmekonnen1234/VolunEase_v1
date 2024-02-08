@@ -22,20 +22,6 @@ def teardown(error):
     storage.close()
 
 
-def find_org(token):
-    """This method will find the token and return True if it's
-    find otherwise False"""
-    from api.v1.app import app as api_app
-    if not token:
-        return False
-
-    org_id = jwt_decode(token, api_app.config["SECRET_KEY"])
-    org = storage.get(Organization, org_id)
-    if org:
-        return True
-    else:
-        return False
-
 @app.route("/")
 @app.route("/index")
 def landing_page():
@@ -63,45 +49,33 @@ def about_us():
 @app.route("/dashboard")
 def org_dashboard():
     """This method will fetch organization dasboard page"""
-    if find_org(request.headers.get('Authorization')):
-        return render_template("organization_dashboard.html")
-    else:
-        return "Not Found"
-
+    return render_template("organization_dashboard.html")
+    
 
 @app.route("/volunteers-registration")
 def volun_registeer():
     """This method will fetch vounteer registeer page"""
-    if find_org(request.headers.get('Authorization')):
-        return render_template("volunteer_register.html")
-    else:
-        return "Not Found"
+    return render_template("volunteer_register.html")
+
 
 @app.route("/volunteers-list")
 def volun_list():
     """This method will fetch vounteer registeer page"""
-    if find_org(request.headers.get('Authorization')):
-        return render_template("volunteer_list.html")
-    else:
-        return "Not Found"
+    return render_template("volunteer_list.html")
 
 
 @app.route("/volunteers")
 def volun_detail():
     """This method will fetch vounteer registeer page"""
-    if find_org(request.headers.get('Authorization')):
-        return render_template("volunteer_detail.html")
-    else:
-        return "Not Found"
+    return render_template("volunteer_detail.html")
+
 
 
 @app.route("/create-event")
 def event_create():
     """This method will fetch event create page"""
-    if find_org(request.headers.get('Authorization')):
-        return render_template("create_event.html")
-    else:
-        return "Not Found"
+    return render_template("create_event.html")
+
 
 
 @app.route("/event-list")

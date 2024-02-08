@@ -1,5 +1,30 @@
 // Add this JavaScript to a separate dashboard.js file
 
+$(document).ready(function () {
+    const apiUrl = 'http://127.0.0.2:5001/api/v1/dashboard';
+    
+    var token = localStorage.getItem('X-access-token');
+
+    $.ajax({
+        url: apiUrl,
+        type: 'GET',
+        headers: {
+          'Authorization': token,
+          'Content-Type': 'application/json',
+        },
+        success: function (data) {
+          $(".organization-info h1").text(data.org.name)
+          $(".description-section p").text(data.org.description)
+          console.log(data)
+        },
+        error: function (error) {
+            console.error('Error:', error);
+            // Handle login error (e.g., display an error message)
+        }
+    });
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // Events chart data
     var eventsData = {

@@ -5,12 +5,13 @@ $(document).ready(function () {
     $('.login-form').submit(function (event) {
         event.preventDefault();
 
-        const apiUrl = 'http://127.0.0.2:5001/api/v1/login';
+        const apiUrl = 'http://127.0.0.2:5001/api/v1/';
+        const apiUrl1 = "http://127.0.0.1:5000/"
         const username = $('#email').val();
         const password = $('#password').val();
 
         $.ajax({
-            url: apiUrl,
+            url: apiUrl + 'login',
             type: 'POST',
             contentType: 'application/json',
             data: JSON.stringify({
@@ -19,10 +20,10 @@ $(document).ready(function () {
             }),
             success: function (data) {
                 // Store the token in the local storage
-                localStorage.setItem('token', data.token);
+                localStorage.setItem('X-access-token', data.token);
 
                 // Redirect to the dashboard page
-                //window.location.href = '/dashboard';
+                window.location.href = apiUrl1 + 'dashboard';
                 console.log("token ",data.token)
                 console.log(data.orgs)
             },
