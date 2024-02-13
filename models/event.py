@@ -32,7 +32,7 @@ class Event(BaseModel, Base):
     org_id = Column(String(60), ForeignKey("organizations.id"),
                     nullable=False)
     part_time = Column(Float, nullable=True)
-    description = Column(String(500), nullable=False, unique=False)
+    description = Column(String(1000), nullable=False, unique=False)
     volunteers = relationship("Volunteer", secondary=event_student,
                               viewonly=False)
 

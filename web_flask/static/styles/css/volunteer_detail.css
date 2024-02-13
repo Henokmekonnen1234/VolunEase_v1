@@ -1,12 +1,5 @@
 /* Add this CSS to the existing styles.css file */
 
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-  
   .Volunter_container {
     max-width: 800px;
     margin: 20px auto;
@@ -103,6 +96,18 @@ body {
   th, td {
     max-width: 200px; /* Set a maximum width for cells */
   }
+
+  /* Add these styles to your CSS to give colors to the buttons */
+.update-btn {
+  background-color: green;
+  color: white;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+}
+
 
   /* .table-container {
     width: 100%;

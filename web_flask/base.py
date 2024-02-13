@@ -50,6 +50,11 @@ def about_us():
 def org_dashboard():
     """This method will fetch organization dasboard page"""
     return render_template("organization_dashboard.html")
+
+@app.route("/organizations")
+def update_org():
+    """This method will fetch organization dasboard page"""
+    return render_template("update_org.html")
     
 
 @app.route("/volunteers-registration")
@@ -69,7 +74,10 @@ def volun_detail():
     """This method will fetch vounteer registeer page"""
     return render_template("volunteer_detail.html")
 
-
+@app.route("/update-volunteers")
+def update_volun():
+    """This method will fetch vounteer registeer page"""
+    return render_template("update_volunteer.html")
 
 @app.route("/create-event")
 def event_create():
@@ -88,6 +96,11 @@ def event_list():
 def event_detail():
     """This method will fetch event list page"""
     return render_template("event_detail.html")
+
+@app.route("/update-events")
+def event_update():
+    """This method will fetch event list page"""
+    return render_template("update_event.html")
 
 
 if __name__ == "__main__":

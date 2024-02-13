@@ -33,7 +33,7 @@ body {
 	  display: none;
 	  flex-direction: column;
 	  text-align: center;
-	  background-color:#333;
+	  background-color:whitesmoke;
 	  position: absolute;
 	  top: 60px;
 	  left: 0;
@@ -51,7 +51,7 @@ body {
 	#mainNav a {
 	  padding: 15px;
 	  display: block;
-	  color: #fff;
+	  color: grey;
 	  text-decoration: none;
 	}
   
@@ -72,7 +72,7 @@ body {
 	  }
 	  
 	  .dropdown-content a:hover {
-		background-color: #555;
+		background-color: whitesmoke;
 	  }
 	  
 	  .dropdown:hover .dropdown-content {

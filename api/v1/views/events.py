@@ -16,7 +16,8 @@ def get_events():
     """This will list the available events"""
     events = storage.all(Event).values()
     if events:
-        event_list = [value.to_dict() for value in events]
+        sorted_events = sorted(events, key=lambda x: x.start_time, reverse=True)
+        event_list = [value.to_dict() for value in sorted_events]
         return jsonify(event_list)
     else:
         return jsonify([])
@@ -50,6 +51,7 @@ def create_event():
         new_dict["org_id"] = org.id
         volun_list = new_dict["volunteers"]
         del new_dict["volunteers"]
+        new_dict["created_date"] = "2023-10-28T10:00:00.000"
         events = Event(**new_dict)
         for volunteer in volun_list:
             events.volunteers.append(storage.filter(Volunteer, "id", volunteer))
@@ -62,3 +64,56 @@ def create_event():
     else:
         return abort(404)
     
+@app_views.route("/events/<id>", methods=["PUT"], strict_slashes=False)
+def update_event(id=None):
+    """This method will update the volunteer data"""
+    from api.v1.app import app
+    token = request.headers.get("Authorization")
+    if not token:
+        return make_response(jsonify({"message": "token not found"}), 401)
+    if not id:
+        return jsonify("value is not found"), 401
+    else:
+        org_id = jwt_decode(token, app.config["SECRET_KEY"])
+        if org_id is None:
+             return jsonify("Invalid Token, please log in again"), 401
+        new_dict = request.get_json()
+        new_dict["org_id"] = org_id
+        volun_list = new_dict["volunteers"]
+        del new_dict["volunteers"]
+        event = storage.get(Event, id)
+        if volun_list:
+            for volunteer in volun_list:
+                event.volunteers.append(storage.filter(Volunteer, "id", volunteer))
+        if event:
+            for key, value in new_dict.items():
+                if value != None:
+                    if key != "id" or key != "update_date" or\
+                        key != "created_date":
+                        setattr(event, key, value)
+            event.save()
+            print(event.to_dict())
+        else:
+            return jsonify("event not found")
+        return jsonify("Error unkown")
+    
+@app_views.route('/events/<id>', methods=['DELETE'],
+                 strict_slashes=False)
+def delete_event(id=None):
+    """
+    Deletes a Review Object
+    """
+    from api.v1.app import app
+    token = request.headers.get('Authorization')
+    if not token:
+        return jsonify({'message': 'Missing token'}), 401
+    if not id:
+        return jsonify("Value not found")
+    org_id = jwt_decode(token, app.config["SECRET_KEY"])
+    event = storage.get(Event, id)
+    if org_id and event:
+        storage.delete(event)
+        storage.save()
+        return make_response(jsonify({"id": id}), 200)
+    else:
+        return jsonify("Log in again please")

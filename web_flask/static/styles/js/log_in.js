@@ -1,6 +1,5 @@
 
 // login.js
-
 $(document).ready(function () {
     $('.login-form').submit(function (event) {
         event.preventDefault();
@@ -19,10 +18,8 @@ $(document).ready(function () {
                 password: password,
             }),
             success: function (data) {
-                // Store the token in the local storage
-                console.log("token ",data.token)
+                clearCookie('X-access-token');
                 setCookie('X-access-token', data.token, 30);
-                // Redirect to the dashboard page
                 window.location.href = apiUrl1 + 'dashboard';
                 console.log(data.orgs)
             },
@@ -39,6 +36,9 @@ $(document).ready(function () {
         document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
     }
 
+    function clearCookie(name) {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+    }
 
 });
 

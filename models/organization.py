@@ -21,7 +21,7 @@ class Organization(BaseModel, Base):
     website = Column(String(128), nullable=False)
     address = Column(String(255), nullable=False)
     legal_document = Column(String(255), nullable=True)
-    description = Column(String(500), nullable=False)
+    description = Column(String(1000), nullable=False)
     events = relationship("Event", backref="organizations",
                           cascade="all, delete, delete-orphan")
     volunteers =  relationship("Volunteer", backref="organizations",

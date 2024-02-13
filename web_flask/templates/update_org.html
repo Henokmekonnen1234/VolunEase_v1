@@ -27,20 +27,7 @@
         <ul>
           <li><a href="{{ url_for('landing_page') }}">Home</a></li>
           <li><a href="{{ url_for('about_us') }}">About Us</a></li>
-          <li class="dropdown">
-            <a href="#">Events</a>
-            <div class="dropdown-content">
-              <a href="{{ url_for('event_list') }}">Events List</a>                       
-              <a id="event_create" href="{{ url_for('event_create') }}">Create Event</a>
-            </div>
-          </li>
-          <li class="dropdown">
-            <a id="volunteers_data" href="#">Volunteers</a>
-            <div class="dropdown-content">
-              <a href="{{ url_for('volun_registeer') }}">Register Volunteer</a>
-              <a href="{{ url_for('volun_list') }}">Volunteers List</a>
-            </div>
-          </li>
+          <li><a href="{{ url_for('event_list') }}">Events</a></li>
           <li class="dropdown">
             <a href="#">Account</a>
             <div id="signed" class="dropdown-content">
@@ -58,27 +45,27 @@
   </header>
 
   <div class="registration-container">
-    <form class="registration-form" id="org_registration">
-      <h2>VolunEase Registration</h2>
+    <form class="registration-form" id="update_org">
+      <h2>VolunEase Organization</h2>
 
       <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your organization name" required>
+        <input type="text" id="name" name="name" placeholder="Enter your organization name" >
       </div>
 
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+        <input type="email" id="email" name="email" placeholder="Enter your email address" >
       </div>
 
       <div class="form-group">
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        <input type="password" id="password" name="password" placeholder="Enter your password" >
       </div>
 
       <div class="form-group">
         <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone_no" name="phone_no" placeholder="Enter your phone number" required>
+        <input type="tel" id="phone_no" name="phone_no" placeholder="Enter your phone number" >
       </div>
 
       <div class="form-group">
@@ -106,7 +93,7 @@
         <textarea id="description" name="description" placeholder="Enter a brief description"></textarea>
       </div>
 
-      <button type="submit">Register</button>
+      <button type="submit">Update</button>
     </form>
   </div>
 

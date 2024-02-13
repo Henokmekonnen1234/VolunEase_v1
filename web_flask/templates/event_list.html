@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../static/styles/css/footer.css">
     <link rel="stylesheet" href="../static/styles/css/event_list.css">
     <link rel='shortcut icon' href="../static/images/VE.png" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../static/styles/js/event_list.js"></script>
+    <script src="../static/styles/js/script.js"></script>
 </head>
 <body>
 
@@ -17,7 +20,8 @@
     <div class="header-container">
       <div class="logo">
         <div class="logo_image"></div>
-        <h1>VolunEase</h1>
+        <h1 id="unsigned_dashboard">VolunEase</h1>
+        <a id="dashboard" href="{{ url_for('org_dashboard') }}"><h2>VolunEase</h2></a>
       </div>
       <div class="menu-icon" id="menuIcon">&#9776;</div>
       <nav id="mainNav">
@@ -28,11 +32,11 @@
             <a href="#">Events</a>
             <div class="dropdown-content">
               <a href="{{ url_for('event_list') }}">Events List</a>                       
-              <a href="{{ url_for('event_create') }}">Create Event</a>
+              <a id="event_create" href="{{ url_for('event_create') }}">Create Event</a>
             </div>
           </li>
           <li class="dropdown">
-            <a href="#">Volunteers</a>
+            <a id="volunteers_data" href="#">Volunteers</a>
             <div class="dropdown-content">
               <a href="{{ url_for('volun_registeer') }}">Register Volunteer</a>
               <a href="{{ url_for('volun_list') }}">Volunteers List</a>
@@ -40,7 +44,11 @@
           </li>
           <li class="dropdown">
             <a href="#">Account</a>
-            <div class="dropdown-content">
+            <div id="signed" class="dropdown-content">
+              <a href="{{ url_for('update_org') }}" id="update">Update</a>
+              <a href="#" id="logout">Log out</a>
+            </div>
+            <div id="unsigned" class="dropdown-content">
               <a href="{{ url_for('login') }}">Log In</a>
               <a href="{{ url_for('register') }}">Register</a>
             </div>
@@ -50,6 +58,11 @@
     </div>
   </header>
 
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search by name or title">
+    <ul id="searchResults"></ul>
+  </div>
+  
   <div class="event-listing">
     <div class="event-item">
       <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
@@ -58,85 +71,10 @@
       <p class="time">Starts: January 1, 2024, 7:00 PM</p>
       <p class="time">Ends: January 1, 2024, 10:00 PM</p>
     </div>
-
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-    <div class="event-item">
-      <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="Event 1">
-      <h3>Event Title 1</h3>
-      <p class="place">Event Place 1</p>
-      <p class="time">Starts: January 1, 2024, 7:00 PM</p>
-      <p class="time">Ends: January 1, 2024, 10:00 PM</p>
-    </div>
-
   </div>
 
   <footer>
     <p>&copy; All rights reserved.</p>
   </footer>
-  <script src="../static/styles/js/script.js"></script>
-
 </body>
 </html>

@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../static/styles/css/header.css">
     <link rel="stylesheet" href="../static/styles/css/container.css">
     <link rel="stylesheet" href="../static/styles/css/footer.css">
-    <link rel="stylesheet" href="../static/styles/css/registration.css">
+    <link rel="stylesheet" href="../static/styles/css/create_event.css">
     <link rel='shortcut icon' href="../static/images/VE.png" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="../static/styles/js/register.js"></script>
+    <script src="../static/styles/js/event_creation.js"></script>
+    <script src="../static/styles/js/script.js"></script>
 </head>
 <body>
 
@@ -57,63 +58,53 @@
     </div>
   </header>
 
-  <div class="registration-container">
-    <form class="registration-form" id="org_registration">
-      <h2>VolunEase Registration</h2>
-
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your organization name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
-      </div>
-
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone_no" name="phone_no" placeholder="Enter your phone number" required>
-      </div>
-
-      <div class="form-group">
-        <label for="website">Website:</label>
-        <input type="text" id="website" name="website" placeholder="Enter your website URL">
-      </div>
-
-      <div class="form-group">
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" placeholder="Enter your address"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="image">Image or Logo:</label>
-        <input type="file" id="image" name="image" accept="image/*">
-      </div>
-
-      <div class="form-group">
-        <label for="image">Legal Document:</label>
-        <input type="file" id="legal_document" name="legal_document" accept="file/*">
-      </div>
-
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" placeholder="Enter a brief description"></textarea>
-      </div>
-
-      <button type="submit">Register</button>
+  <div class="event_container">
+    <form class="create-event-form" id="update_event">
+      <fieldset class="create-event-fieldset">
+        <legend>Update Event</legend>
+        
+        <fieldset class="event-info-fieldset">
+          <legend>Event Information</legend>
+          <div class="form-group">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" placeholder="Enter event title">
+          </div>
+          <div class="form-group">
+            <label for="place">Place:</label>
+            <input type="text" id="place" name="place" placeholder="Enter event place">
+          </div>
+          <div class="form-group">
+            <label for="startTime">Starting Time:</label>
+            <input type="datetime-local" id="start_time" name="start_time">
+          </div>
+          <div class="form-group">
+            <label for="endTime">End Time:</label>
+            <input type="datetime-local" id="end_time" name="end_time">
+          </div>
+          <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*">
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" placeholder="Enter event description"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="volunteerId">Volunteer:</label>
+            <select id="volunteers" name="volunteers" multiple>
+              
+            </select>
+          </div>
+  </fieldset>
+        
+        <button type="submit">Update Event</button>
+      </fieldset>
     </form>
   </div>
+
 
   <footer>
     <p>&copy; All rights reserved.</p>
   </footer>
-  <script src="../static/styles/js/script.js"></script>
-
 </body>
 </html>

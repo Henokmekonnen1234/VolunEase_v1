@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="../static/styles/css/footer.css">
     <link rel="stylesheet" href="../static/styles/css/volunteer_register.css">
     <link rel='shortcut icon' href="../static/images/VE.png" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../static/styles/js/register.js"></script>
+    <script src="../static/styles/js/script.js"></script>
 </head>
 <body>
 
@@ -17,7 +20,8 @@
     <div class="header-container">
       <div class="logo">
         <div class="logo_image"></div>
-        <h1>VolunEase</h1>
+        <h1 id="unsigned_dashboard">VolunEase</h1>
+        <a id="dashboard" href="{{ url_for('org_dashboard') }}"><h2>VolunEase</h2></a>
       </div>
       <div class="menu-icon" id="menuIcon">&#9776;</div>
       <nav id="mainNav">
@@ -28,11 +32,11 @@
             <a href="#">Events</a>
             <div class="dropdown-content">
               <a href="{{ url_for('event_list') }}">Events List</a>                       
-              <a href="{{ url_for('event_create') }}">Create Event</a>
+              <a id="event_create" href="{{ url_for('event_create') }}">Create Event</a>
             </div>
           </li>
           <li class="dropdown">
-            <a href="#">Volunteers</a>
+            <a id="volunteers_data" href="#">Volunteers</a>
             <div class="dropdown-content">
               <a href="{{ url_for('volun_registeer') }}">Register Volunteer</a>
               <a href="{{ url_for('volun_list') }}">Volunteers List</a>
@@ -40,8 +44,13 @@
           </li>
           <li class="dropdown">
             <a href="#">Account</a>
-            <div class="dropdown-content">
+            <div id="signed" class="dropdown-content">
+              <a href="{{ url_for('update_org') }}" id="update">Update</a>
               <a href="#" id="logout">Log out</a>
+            </div>
+            <div id="unsigned" class="dropdown-content">
+              <a href="{{ url_for('login') }}">Log In</a>
+              <a href="{{ url_for('register') }}">Register</a>
             </div>
           </li>
         </ul>
@@ -50,7 +59,7 @@
   </header>
 
   <div class="registration-container">
-    <form class="registration-form">
+    <form class="registration-form" id="volun_registeer">
       <fieldset class="name-fieldset">
         <legend>Volunteer Name</legend>
         <div class="form-group">
@@ -80,8 +89,8 @@
         <div class="form-group">
           <label for="gender">Gender:</label>
           <select id="gender" name="gender">
-            <option value="male">Male</option>
-            <option value="female">Female</option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
           </select>
         </div>
         <div class="form-group">
@@ -105,7 +114,6 @@
   <footer>
     <p>&copy; All rights reserved.</p>
   </footer>
-  <script src="../static/styles/js/script.js"></script>
-
+  
 </body>
 </html>

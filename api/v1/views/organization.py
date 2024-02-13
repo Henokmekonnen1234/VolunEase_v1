@@ -12,7 +12,7 @@ from models.utility import encrypt, decrypt, jwt_encode, jwt_decode
 from models.utility import taken_value
 import jwt
 
-@app_views.route("/organizations", methods=["GET"], strict_slashes=False)
+@app_views.route("/organizations/all", methods=["GET"], strict_slashes=False)
 def get_organizations():
     """This method gets all organization objects"""
     organization = storage.all(Organization).values()
@@ -20,6 +20,22 @@ def get_organizations():
     for orgs in organization:
         list_org.append(orgs.to_dict())
     return jsonify(list_org)
+
+@app_views.route("/organizations", methods=["GET"], strict_slashes=False)
+def get_org():
+    """This method gets all organization objects"""
+    from api.v1.app import app
+    token = request.headers.get('Authorization')
+    if not token:
+        return jsonify({'message': 'Missing token'}), 401
+    org_id = jwt_decode(token, app.config["SECRET_KEY"])
+    org = storage.get(Organization, org_id)
+    if org:
+        return jsonify(org.to_dict())        
+    else:
+        return jsonify("not FOund")
+
+
 
 @app_views.route("/organizations", methods=["POST"], strict_slashes=False)
 def register_organization():
@@ -85,15 +101,13 @@ def dashboard():
         org_id = jwt_decode(token, app.config["SECRET_KEY"])
         org = storage.get(Organization, org_id)
         events = storage.all(Event).values()
-        events_year = {}
-        volun_year = {}
-        year = []
-        for value in events:
-            if value.created_date.year not in year:
-                year.append(value.created_date.year)
-        
+        volunteer = storage.all(Volunteer).values()
+        events_year = eachList(org, events)
+        volun_year = eachList(org, volunteer)
         if org:
-            return jsonify({"org": org.to_dict()})
+            return jsonify({"org": org.to_dict(),
+                            "events_year": events_year,
+                            "volun_year": volun_year})
         else:
             return jsonify({'message': 'Invalid user'}), 401
     else:
@@ -111,14 +125,31 @@ def update_organization():
     org = storage.get(Organization, org_id)
     if org:
         new_dict =  request.get_json()
-        new_dict["password"] = encrypt(new_dict["password"])
+        if new_dict["password"] != None:
+            new_dict["password"] = encrypt(new_dict["password"])
         for key, value in new_dict.items():
-            if key != "id" or "created_date" != key or\
-                 "updated_date" != key:
-                setattr(org, key, value)
+            if value != None:
+                if key != "id" or "created_date" != key or\
+                                     "updated_date" != key:
+                     setattr(org, key, value)
         org.save()
-        response = make_response(jsonify(org.to_dict()))
-        response.headers["Authorization"] = token
-        return response
+        return jsonify("Update Successfull")
     else:
         abort(404)
+
+def eachList(org, lists):
+    """This will return each year counting events or volunteers in
+    each year"""
+    year_pair = {}
+    for value in lists:
+            if org.id == value.org_id:
+                if value.created_date.year not in year_pair.keys():
+                    year_pair[value.created_date.year] = 0
+    for key, value in year_pair.items():
+        count = 0
+        for values in lists:
+            if key == values.created_date.year and\
+                org.id == values.org_id:
+                count += 1
+        year_pair[key] = count
+    return year_pair

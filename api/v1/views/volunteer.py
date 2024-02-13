@@ -44,6 +44,7 @@ def register_volunteer():
     if org:
         new_data = request.get_json()
         new_data["org_id"] = org.id
+        new_data["created_date"] = "2023-10-28T10:00:00.000"
         instance = Volunteer(**new_data)
         instance.save()
         if instance:
@@ -55,7 +56,7 @@ def register_volunteer():
 
 
 @app_views.route("/volunteers/<id>", methods=["GET"], strict_slashes=False)
-def get_volunteer(id=None):
+def get_volunteer(id):
     """This method will handle individual value of volunteer"""
     from api.v1.app import app
     token = request.headers.get("Authorization")
@@ -129,13 +130,14 @@ def update_volunteer(id=None):
              return jsonify("Invalid Token, please log in again"), 401
         new_dict = request.get_json()
         new_dict["org_id"] = org_id
-        volunteer = storage.get(Volunteer, new_dict["id"])
+        volunteer = storage.get(Volunteer, id)
         if not volunteer:
             return jsonify("value is not found"), 401
         for key, value in new_dict.items():
-            if key != "id" or key != "update_date" or\
-                  key != "created_date":
-                setattr(volunteer, key, value)
+            if value != None:
+                if key != "id" or key != "update_date" or\
+                                      key != "created_date":
+                     setattr(volunteer, key, value)
         volunteer.save()
         print(volunteer.to_dict())
         return jsonify(volunteer.to_dict())

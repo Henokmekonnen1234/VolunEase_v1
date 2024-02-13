@@ -8,10 +8,11 @@
     <link rel="stylesheet" href="../static/styles/css/header.css">
     <link rel="stylesheet" href="../static/styles/css/container.css">
     <link rel="stylesheet" href="../static/styles/css/footer.css">
-    <link rel="stylesheet" href="../static/styles/css/registration.css">
+    <link rel="stylesheet" href="../static/styles/css/volunteer_register.css">
     <link rel='shortcut icon' href="../static/images/VE.png" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="../static/styles/js/register.js"></script>
+    <script src="../static/styles/js/script.js"></script>
 </head>
 <body>
 
@@ -58,62 +59,61 @@
   </header>
 
   <div class="registration-container">
-    <form class="registration-form" id="org_registration">
-      <h2>VolunEase Registration</h2>
+    <form class="registration-form" id="update_volun">
+      <fieldset class="name-fieldset">
+        <legend>Volunteer Name</legend>
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" id="first_name" name="first_name" placeholder="Enter your first name" >
+        </div>
+        <div class="form-group">
+          <label for="secondName">Second Name:</label>
+          <input type="text" id="mid_name" name="mid_name" placeholder="Enter your father name" >
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" id="last_name" name="last_name" placeholder="Enter your grandfather name" >
+        </div>
+      </fieldset>
 
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Enter your organization name" required>
-      </div>
+      <fieldset class="info-fieldset">
+        <legend>Volunteer Information</legend>
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number:</label>
+          <input type="tel" id="phone_no" name="phone_no" placeholder="Enter your phone number">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email address" >
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender:</label>
+          <select id="gender" name="gender">
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="occupation">Occupation:</label>
+          <input type="text" id="occupation" name="occupation" placeholder="Enter your occupation">
+        </div>
+        </fieldset>
 
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" placeholder="Enter your email address" required>
-      </div>
+      <fieldset class="image-fieldset">
+        <legend>Insert Image</legend>
+        <div class="form-group">
+          <label for="image">Choose Image:</label>
+          <input type="file" id="image" name="image" accept="image/*" >
+        </div>
+      </fieldset>
 
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">Phone Number:</label>
-        <input type="tel" id="phone_no" name="phone_no" placeholder="Enter your phone number" required>
-      </div>
-
-      <div class="form-group">
-        <label for="website">Website:</label>
-        <input type="text" id="website" name="website" placeholder="Enter your website URL">
-      </div>
-
-      <div class="form-group">
-        <label for="address">Address:</label>
-        <textarea id="address" name="address" placeholder="Enter your address"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="image">Image or Logo:</label>
-        <input type="file" id="image" name="image" accept="image/*">
-      </div>
-
-      <div class="form-group">
-        <label for="image">Legal Document:</label>
-        <input type="file" id="legal_document" name="legal_document" accept="file/*">
-      </div>
-
-      <div class="form-group">
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" placeholder="Enter a brief description"></textarea>
-      </div>
-
-      <button type="submit">Register</button>
+      <button type="submit">Update</button>
     </form>
   </div>
 
   <footer>
     <p>&copy; All rights reserved.</p>
   </footer>
-  <script src="../static/styles/js/script.js"></script>
-
+  
 </body>
 </html>

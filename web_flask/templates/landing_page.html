@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../static/styles/css/container.css">
     <link rel="stylesheet" href="../static/styles/css/footer.css">
     <link rel='shortcut icon' href="../static/images/VE.png" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="../static/styles/js/script.js"></script>
 </head>
 <body>
 
@@ -16,17 +18,35 @@
     <div class="header-container">
       <div class="logo">
         <div class="logo_image"></div>
-        <h1>VolunEase</h1>
+        <h1 id="unsigned_dashboard">VolunEase</h1>
+        <a id="dashboard" href="{{ url_for('org_dashboard') }}"><h2>VolunEase</h2></a>
       </div>
       <div class="menu-icon" id="menuIcon">&#9776;</div>
       <nav id="mainNav">
         <ul>
           <li><a href="{{ url_for('landing_page') }}">Home</a></li>
           <li><a href="{{ url_for('about_us') }}">About Us</a></li>
-          <li><a href="{{ url_for('event_list') }}">Events</a></li>
+          <li class="dropdown">
+            <a href="#">Events</a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('event_list') }}">Events List</a>                       
+              <a id="event_create" href="{{ url_for('event_create') }}">Create Event</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a id="volunteers_data" href="#">Volunteers</a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('volun_registeer') }}">Register Volunteer</a>
+              <a href="{{ url_for('volun_list') }}">Volunteers List</a>
+            </div>
+          </li>
           <li class="dropdown">
             <a href="#">Account</a>
-            <div class="dropdown-content">
+            <div id="signed" class="dropdown-content">
+              <a href="{{ url_for('update_org') }}" id="update">Update</a>
+              <a href="#" id="logout">Log out</a>
+            </div>
+            <div id="unsigned" class="dropdown-content">
               <a href="{{ url_for('login') }}">Log In</a>
               <a href="{{ url_for('register') }}">Register</a>
             </div>
@@ -50,7 +70,7 @@
 					 make a difference in the community.</h4>
 				<h3>Get started now and be part of something bigger.
 					 VolunEase - Where Every Volunteer Matters.</h3>
-				<div class="register"><button>Register</button></div>
+				<div class="register"><a href="{{ url_for('register') }}"><button>Register</button></a></div>
       </div>
       <div class="right">
         <img src="static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg" alt="About VolunEase">
@@ -98,7 +118,5 @@
   <footer>
     <p>&copy; All rights reserved.</p>
   </footer>
-  <script src="../static/styles/js/script.js"></script>
-
 </body>
 </html>
