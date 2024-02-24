@@ -9,10 +9,13 @@
     <link rel="stylesheet" href="../static/styles/css/container.css">
     <link rel="stylesheet" href="../static/styles/css/footer.css">
     <link rel="stylesheet" href="../static/styles/css/event_list.css">
+    <link rel="stylesheet" href="../static/styles/css/search.css""
     <link rel='shortcut icon' href="../static/images/VE.png" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="../static/styles/js/script.js"></script>
     <script src="../static/styles/js/volun_list.js"></script>
+    <script src="../static/styles/js/message.js"></script>
+    <script src="../static/styles/js/search.js"></script>
 </head>
 <body>
 
@@ -31,7 +34,7 @@
           <li class="dropdown">
             <a href="#">Events</a>
             <div class="dropdown-content">
-              <a href="{{ url_for('event_list') }}">Events List</a>                       
+              <a href="{{ url_for('event_list') }}">Events List</a>
               <a id="event_create" href="{{ url_for('event_create') }}">Create Event</a>
             </div>
           </li>
@@ -47,6 +50,7 @@
             <div id="signed" class="dropdown-content">
               <a href="{{ url_for('update_org') }}" id="update">Update</a>
               <a href="#" id="logout">Log out</a>
+              <a href="#" id="delete">Delete account</a>
             </div>
             <div id="unsigned" class="dropdown-content">
               <a href="{{ url_for('login') }}">Log In</a>
@@ -58,7 +62,17 @@
     </div>
   </header>
 
-  <div class="event-listing">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search by name or title">
+    <ul id="searchResults"></ul>
+  </div>
+
+  <div class="event-listing" id="volun_list">
+    <div id="messageBox" class="message-box">
+      <p></p>
+      <span class="close-button">x</span>
+    </div>
+
     <div class="event-item">
       <img src="" alt="Event 1">
       <h3></h3>

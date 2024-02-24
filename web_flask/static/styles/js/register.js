@@ -2,13 +2,14 @@
 $(document).ready(function () {
     let apiUrl = "http://127.0.0.2:5001/api/v1/";
     let weburl = "http://127.0.0.1:5000/";
+    const register = "http://127.0.0.1:5000/register"
 
     let token = getCookie('X-access-token');
     let volun_id = getCookie("volun_id")
 
     if ($('.registration-form').attr("id") === "org_registration") {
         apiUrl = apiUrl + "organizations"
-        weburl = weburl + "dashboard"
+        weburl = weburl + "log-in"
         methods = "POST"
     } else if ($('.registration-form').attr("id") === "volun_registeer"){
         apiUrl = apiUrl + "volunteers"
@@ -20,10 +21,12 @@ $(document).ready(function () {
                 "Authorization": token
             },
             success: function(data) {
-    
+
             },
             error: function(error) {
                 $(".registration-container").hide()
+                clearCookie("message")
+                setCookie("message", error.responseJSON.error, 30)
             }
         })
     } else if($('.registration-form').attr("id") === "update_org") {
@@ -42,13 +45,13 @@ $(document).ready(function () {
             $("#phone_no").val(data.phone_no)
             $("#website").val(data.website)
             $("#address").val(data.address)
-            $("#image").val(data.image)
-            $("#legal_document").val(data.legal_document)
             $("#description").text(data.description)
-            
+
           },
           error: function(error) {
-              window.location.href = weburl + "log-in"
+            clearCookie("message")
+            setCookie("message", error.responseJSON.error, 30)
+              window.location.href = register
           }
     })
   } else if($('.registration-form').attr("id") === "update_volun") {
@@ -71,50 +74,54 @@ $(document).ready(function () {
           console.log(data)
         },
         error: function(error) {
-            window.location.href = weburl + "log-in"
+            clearCookie("message")
+            setCookie("message", error.responseJSON.error, 30)
+            window.location.href = register
         }
   })
 }
 
     $('.registration-form').submit(function (event) {
       event.preventDefault();
-  
-      // Get form data as a dictionary
-      const formData = {};
-      const formElements = this.elements;
-  
-      // Check if formElements is defined and has a length property
-      if (formElements && formElements.length) {
-        for (let i = 0; i < formElements.length; i++) {
-          const element = formElements[i];
-          if (element.type !== 'submit') {
-            formData[element.name] = element.value;
-          }
-        }
-  
+
+
+      const formData = new FormData(this);
+      if (document.getElementById('image').files.length > 0 ){
+      formData.append('image', document.getElementById('image').files[0]);
+      if ($('.registration-form').attr("id") === "org_registration") {
+        formData.append('legal_document', document.getElementById('legal_document').files[0]);
+      }
+    }
+
         $.ajax({
           url: apiUrl,
           type: methods,
           headers: {
             "Authorization": token,
-            "Content-Type": "application/json"
           },
-          data: JSON.stringify(formData),
+          data: formData,
+          contentType: false,  // Important: prevent jQuery from setting contentType
+          processData: false,
           success: function (data) {
             if ($(".registration-form").attr("id") === "volun_registeer"){
                 clearCookie("volun_id")
                 setCookie("volun_id", data.id)
             }
             window.location.href = weburl
+
           },
           error: function (error) {
-            console.error('Error:', error);
+            clearCookie("message")
+            setCookie("message", error.responseJSON.error, 30)
+            window.location.href = register
           }
         });
 
-      }
+      //}
 
-    });
+
+  });
+
 
     function setCookie(name, value, days) {
         const expires = new Date();
@@ -138,4 +145,19 @@ $(document).ready(function () {
     }
 
   });
-  
+
+
+
+
+      // // Get form data as a dictionary
+      // const formData = {};
+      // const formElements = this.elements;
+
+      // // Check if formElements is defined and has a length property
+      // if (formElements && formElements.length) {
+      //   for (let i = 0; i < formElements.length; i++) {
+      //     const element = formElements[i];
+      //     if (element.type !== 'submit') {
+      //       formData[element.name] = element.value;
+      //     }
+      //   }

@@ -98,6 +98,24 @@ class DBStorage:
             return value
         else:
             return None
+        
+    def search(self, cls, search_q, value):
+        """This will filter the titles with the given letter"""
+        if value == "title":
+            obj = self.__session().query(cls).filter(cls.title.ilike(f'{search_q}%')).all()
+            return obj
+        elif value == "name":
+            obj = self.__session().query(cls).filter(cls.first_name.ilike(f'{search_q}%')).all()
+            if obj is not None:
+                return obj
+            obj = self.__session().query(cls).filter(cls.mid_name.ilike(f'{search_q}%')).all()
+            if obj is not None:
+                return obj
+            obj = self.__session().query(cls).filter(cls.last_name.ilike(f'{search_q}%')).all()
+            if obj is not None:
+                return obj
+        else:
+            return None
 
     def count(self, cls=None):
         """

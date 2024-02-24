@@ -1,3 +1,4 @@
+#!/usr/bin/node
 $(document).ready(() => {
     const apiUrl = "http://127.0.0.2:5001/api/v1/events/"
     const weburl = "http://127.0.0.1:5000/"
@@ -19,7 +20,8 @@ $(document).ready(() => {
                 window.location.href = weburl + "event-list"
             },
             error: function(error){
-                console.log("Error ", error)
+                clearCookie("message")
+                setCookie("message", error.responseJSON.error, 30)
             }
         })
     });
@@ -27,6 +29,9 @@ $(document).ready(() => {
         url: apiUrl + events,
         type: "GET",
         success: function(data) {
+            if(data.event.image !== null && data.event.image !== undefined) {
+                $(".volunteer-image img").attr("src", "../static/images" + data.event.image)
+            }
             $(".full-name").text(`Event: ${data.event.title}`)
             $(".phone-number").text(`Place: ${data.event.place}`)
             $(".email").text(`Starting Time: ${formatDate(data.event.start_time)}`)
@@ -48,14 +53,23 @@ $(document).ready(() => {
         },
         error: function (error) {
             $(".Volunter_container").hide()
-            console.log("Error ", error)
+            clearCookie("message")
+            setCookie("message", error.responseJSON.error, 30)
         }
     })
-    
+
+
     function formatDate(value){
         let date = new Date(value);
         return date.toLocaleString();
     }
+
+    function setCookie(name, value, days) {
+        const expires = new Date();
+        expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+        document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    }
+
 
     function getCookie(name) {
         const cookies = document.cookie.split(';');
@@ -66,5 +80,9 @@ $(document).ready(() => {
             }
         }
         return null;
+    }
+
+    function clearCookie(name) {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
     }
 })

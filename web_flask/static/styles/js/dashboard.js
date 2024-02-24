@@ -1,7 +1,6 @@
 $(document).ready(function () {
     const apiUrl = 'http://127.0.0.2:5001/api/v1/dashboard';
-    const apiUrl1 = 'http://127.0.0.1:5000/';
-    
+
     const token = getCookie('X-access-token');
     let dataValue;
 
@@ -16,9 +15,10 @@ $(document).ready(function () {
         success: function (data) {
           $(".organization-info h1").text(data.org.name)
           $(".description-section p").text(data.org.description)
+          $(".organization-image img").attr("src", "../static/images" + data.org.image)
           dataValue = data.events_year
 
-          //chart data 
+          //chart data
           let keys = Object.keys(dataValue)
     let values = Object.values(dataValue)
     var eventsData = {
@@ -31,7 +31,7 @@ $(document).ready(function () {
         data: values, // [10, 15, 8, 20, 12]
       }]
     };
-  
+
     // Volunteers donut chart data
     var volunteersData = {
       labels: Object.keys(data.volun_year), //['Year 1', 'Year 2', 'Year 3', 'Year 4', 'Year 5']
@@ -41,11 +41,11 @@ $(document).ready(function () {
         hoverBackgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF9800'],
       }]
     };
-  
+
     // Get chart canvases
     var eventsCanvas = document.getElementById('eventsChart').getContext('2d');
     var volunteersCanvas = document.getElementById('volunteersDonutChart').getContext('2d');
-  
+
     // Create charts
     var eventsChart = new Chart(eventsCanvas, {
       type: 'bar',
@@ -66,7 +66,7 @@ $(document).ready(function () {
         },
       },
     });
-  
+
     var volunteersDonutChart = new Chart(volunteersCanvas, {
       type: 'doughnut',
       data: volunteersData,
@@ -80,11 +80,10 @@ $(document).ready(function () {
         },
         error: function (error) {
           $(".dashboard-container ").hide()
-            console.error('Error:', error);
-            // Handle login error (e.g., display an error message)
+          setCookie("message", error, 30)
         }
     });
-  
+
     function getCookie(name) {
       const cookies = document.cookie.split(';');
       for (let i = 0; i < cookies.length; i++) {
@@ -96,12 +95,14 @@ $(document).ready(function () {
       return null;
   }
 
-// });
+  function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+  }
 
-
-// document.addEventListener('DOMContentLoaded', function () {
-
-
+  function clearCookie(name) {
+    document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+}
 
   });
-  

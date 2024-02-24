@@ -24,8 +24,10 @@ $(document).ready(function () {
                 console.log(data.orgs)
             },
             error: function (error) {
-                console.error('Error:', error);
-                // Handle login error (e.g., display an error message)
+                clearCookie("message")
+                setCookie("message", error.responseJSON.error, 30)
+               window.location.href = apiUrl1 + "log-in"
+            // console.log(error.responseJSON.message)
             }
         });
     });

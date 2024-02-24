@@ -5,6 +5,7 @@ $(document).ready(function () {
     const token = getCookie('X-access-token');
     const events = getCookie("events")
     let methods = ""
+    const message = getCookie("message")
 
     $.get({
         url: apiUrl + "volunteers",
@@ -20,7 +21,7 @@ $(document).ready(function () {
             console.log("Success form ",data)
         },
         error: function(error){
-            console.log("Error ",error)
+            setCookie("message", error, 30)
         }
     })
 
@@ -34,6 +35,7 @@ $(document).ready(function () {
         },
         error: function(error) {
             $(".event_container").hide()
+            setCookie("message", error, 30)
         }
     })
 
@@ -51,7 +53,7 @@ $(document).ready(function () {
                 console.log(data)
             },
             error: function(error) {
-                console.log("Error ", error)
+                setCookie("message", error, 30)
             }
         })
     } else if ($(".create-event-form").attr("id") == "create_event") {
@@ -66,43 +68,53 @@ $(document).ready(function () {
       const selectElement = document.getElementById('volunteers');
       const selectedOptions = Array.from(selectElement.selectedOptions).map(option => option.value);
 
-      const formData = {};
-      const formElements = this.elements;
-  
+      const formData = new FormData(this);
+      const image = document.getElementById("image")
+      //const formElements = this.elements;
+
       // Check if formElements is defined and has a length property
-      if (formElements && formElements.length) {
-        for (let i = 0; i < formElements.length; i++) {
-          const element = formElements[i];
-          if (element.type !== 'submit' || element.type !== "") {
-            formData[element.name] = element.value;
-          }
+    //   if (formElements && formElements.length) {
+    //     for (let i = 0; i < formElements.length; i++) {
+    //       const element = formElements[i];
+    //       if (element.type !== 'submit' || element.type !== "") {
+    //         formData[element.name] = element.value;
+    //       }
+    //     }
+        if( image.files.length > 0) {
+            formData.append("image", image.files[0])
         }
-        
-        formData["volunteers"] = selectedOptions
-        if (formData["end_time"]) {
-            formData["start_time"] = formData["start_time"] + ":00.000"
-            formData["end_time"] = formData["end_time"] + ":00.000"
-        }
-        console.log(formData)
+
+        formData.set("volunteers", selectedOptions);
+
+        console.log("all files" , formData)
         $.ajax({
             url: apiUrl,
             type: methods,
             headers: {
-                "Authorization": token,
-                "Content-Type": "application/json"
+                "Authorization": token
             },
-            data: JSON.stringify(formData),
+            data: formData,
+            contentType: false,
+            processData: false,
             success: function(data){
                 if ($(".create-event-form").attr("id") == "create_event") {
+                    clearCookie("events")
                     setCookie("events", data.events.id, 30)
                 }
+                clearCookie("message")
+                setCookie("message", data.message, 30)
                 window.location.href = weburl + "events"
+                console.log(data)
+            },
+            error: function(error){
+                clearCookie("message")
+                setCookie("message", error, 30)
             }
         })
 
       }
 
-    });
+    );
 
     function setCookie(name, value, days) {
         const expires = new Date();
@@ -121,5 +133,8 @@ $(document).ready(function () {
         return null;
     }
 
+    function clearCookie(name) {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+    }
+
   });
-  

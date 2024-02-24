@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script defer src="../static/styles/js/dashboard.js"></script>
     <script src="../static/styles/js/script.js"></script>
+    <script src="../static/styles/js/message.js"></script>
 </head>
 <body>
 
@@ -48,6 +49,7 @@
             <div id="signed" class="dropdown-content">
               <a href="{{ url_for('update_org') }}" id="update">Update</a>
               <a href="#" id="logout">Log out</a>
+              <a href="#" id="delete">Delete account</a>
             </div>
             <div id="unsigned" class="dropdown-content">
               <a href="{{ url_for('login') }}">Log In</a>
@@ -60,6 +62,11 @@
   </header>
 
   <div class="dashboard-container">
+    <div id="messageBox" class="message-box">
+      <p></p>
+      <span class="close-button">x</span>
+    </div>
+
     <div class="header">
       <div class="organization-info">
         <h1></h1>

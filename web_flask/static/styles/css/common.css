@@ -13,6 +13,25 @@ body {
 	height: auto;
   }
 
+  .message-box {
+    display: none;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 20px;
+	width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: whitesmoke; /* Red background color (adjust as needed) */
+    color: black; /* Dark red text color (adjust as needed) */
+  }
+  
+  .close-button {
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    margin: 20px
+  }
+
   @media only screen and (min-width: 601px) {
 	.menu-icon {
 	  display: none;
@@ -77,6 +96,24 @@ body {
 	  
 	  .dropdown:hover .dropdown-content {
 		display: block;
+	  }
+
+	  .message-box {
+		display: none;
+		flex-direction: row;
+		justify-content: space-between;
+		margin: 20px;
+		padding: 10px;
+		border: 1px solid #ccc;
+		background-color: #f8d7da; /* Red background color (adjust as needed) */
+		color: whitesmoke; /* Dark red text color (adjust as needed) */
+	  }
+	  
+	  .close-button {
+		top: 5px;
+		right: 10px;
+		cursor: pointer;
+		margin: 20px
 	  }
 
 	/* .dropdown-content {

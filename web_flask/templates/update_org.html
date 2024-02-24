@@ -12,6 +12,7 @@
     <link rel='shortcut icon' href="../static/images/VE.png" />
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="../static/styles/js/register.js"></script>
+    <script src="../static/styles/js/message.js"></script>
 </head>
 <body>
 
@@ -27,12 +28,26 @@
         <ul>
           <li><a href="{{ url_for('landing_page') }}">Home</a></li>
           <li><a href="{{ url_for('about_us') }}">About Us</a></li>
-          <li><a href="{{ url_for('event_list') }}">Events</a></li>
+          <li class="dropdown">
+            <a href="#">Events</a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('event_list') }}">Events List</a>
+              <a id="event_create" href="{{ url_for('event_create') }}">Create Event</a>
+            </div>
+          </li>
+          <li class="dropdown">
+            <a id="volunteers_data" href="#">Volunteers</a>
+            <div class="dropdown-content">
+              <a href="{{ url_for('volun_registeer') }}">Register Volunteer</a>
+              <a href="{{ url_for('volun_list') }}">Volunteers List</a>
+            </div>
+          </li>
           <li class="dropdown">
             <a href="#">Account</a>
             <div id="signed" class="dropdown-content">
               <a href="{{ url_for('update_org') }}" id="update">Update</a>
               <a href="#" id="logout">Log out</a>
+              <a href="#" id="delete">Delete account</a>
             </div>
             <div id="unsigned" class="dropdown-content">
               <a href="{{ url_for('login') }}">Log In</a>
@@ -45,6 +60,11 @@
   </header>
 
   <div class="registration-container">
+    <div id="messageBox" class="message-box">
+      <p></p>
+      <span class="close-button">x</span>
+    </div>
+
     <form class="registration-form" id="update_org">
       <h2>VolunEase Organization</h2>
 

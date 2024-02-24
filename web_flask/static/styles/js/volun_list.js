@@ -26,7 +26,11 @@ $(document).ready(function (){
             datas.forEach((data) => {
                 let eventItem = $("<div class=\"event-item\">")
                 eventItem.empty()
-                eventItem.append($("<img>").attr("src", "../static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg").attr("id", data.id))
+                if(data.image !== null && data.image !== undefined){
+                    eventItem.append($("<img>").attr("src", "../static/images" + data.image).attr("id", data.id))
+                } else {
+                    eventItem.append($("<img>").attr("src", "../static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg").attr("id", data.id))
+                }
                 eventItem.append($("<h3>").text(`Full Name: ${data.first_name} ${data.mid_name} ${data.last_name}`))
                 eventItem.append($("<p class=\"place\">").text(data.gender))
                 eventItem.append($("<p class=\"time\">").text(data.email))

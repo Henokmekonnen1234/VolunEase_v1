@@ -21,7 +21,8 @@ $(document).ready(() => {
                 window.location.href = weburl + "volunteers-list"
             },
             error: function(error){
-                console.log("Error ", error)
+                clearCookie("message")
+                setCookie("message", error.responseJSON.error, 30)
             }
         })
     });
@@ -36,6 +37,8 @@ $(document).ready(() => {
         },
         error: function(error) {
             $(".Volunter_container").hide()
+            clearCookie("message")
+            setCookie("message", error.responseJSON.error, 30)
         }
     })
 
@@ -46,8 +49,8 @@ $(document).ready(() => {
             'Authorization': token
           },
         success: function(data) {
-            if (data.volunteer.image !== null){
-                $(".image").attr("src", data.volunteer.image)
+            if (data.volunteer.image !== null && data.volunteer.image !== undefined){
+                $(".image").attr("src", "../static/images" + data.volunteer.image)
             } else {
                 $(".image").attr("src", "../static/images/portrait-of-volunteers-pointing-at-t-shirt.jpg")
             }
@@ -73,10 +76,11 @@ $(document).ready(() => {
         },
         error: function (error) {
             $(".Volunter_container").hide()
-            console.log("Error ", error)
+            clearCookie("message")
+            setCookie("message", error.responseJSON.error, 30)
         }
     })
-    
+
     function getCookie(name) {
         const cookies = document.cookie.split(';');
         for (let i = 0; i < cookies.length; i++) {
@@ -87,4 +91,15 @@ $(document).ready(() => {
         }
         return null;
     }
+
+    function setCookie(name, value, days) {
+      const expires = new Date();
+      expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+      document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/`;
+    }
+
+    function clearCookie(name) {
+      document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+  }
+  
 })
