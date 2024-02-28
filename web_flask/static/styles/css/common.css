@@ -105,8 +105,8 @@ body {
 		margin: 20px;
 		padding: 10px;
 		border: 1px solid #ccc;
-		background-color: #f8d7da; /* Red background color (adjust as needed) */
-		color: whitesmoke; /* Dark red text color (adjust as needed) */
+		background-color: whitesmoke;
+		color: black;
 	  }
 	  
 	  .close-button {

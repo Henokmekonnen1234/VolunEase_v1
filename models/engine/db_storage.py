@@ -12,6 +12,9 @@ from models.volunteer import Volunteer
 from os import getenv
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from dotenv import load_dotenv
+
+load_dotenv()
 
 classes = {
     "Event": Event,

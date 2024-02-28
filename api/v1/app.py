@@ -6,6 +6,9 @@ from os import environ
 from flask import Flask, make_response, jsonify
 from flask_cors import CORS
 from uuid import uuid4
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = True

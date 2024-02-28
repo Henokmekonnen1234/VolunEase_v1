@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  let message = getCookie("message")
+  let message = " " + getCookie("message")
   const closeMessage = $("#messageBox")
-  console.log(Object.prototype.toString.call(message))
+  console.log("" + message)
   console.log(typeof message === "string")
   console.log(typeof message === "object")
   if (message !== null && message !== undefined && Object.prototype.toString.call(message) === "[object String]"){
@@ -10,14 +10,12 @@ $(document).ready(function(){
     clearCookie("message")
     setTimeout(() => {
       document.getElementById('messageBox').style.display = 'none';
-      message = null
       clearCookie("message")
     }, 5000);
   }
 
   closeMessage.on("click", ".close-button", function(){
       document.getElementById('messageBox').style.display = 'none';
-      message = null
       clearCookie("message")
   })
 
