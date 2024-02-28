@@ -5,8 +5,6 @@ $(document).ready(function () {
     const token = getCookie('X-access-token');
     const events = getCookie("events")
     let methods = ""
-    const message = getCookie("message")
-
     $.get({
         url: apiUrl + "volunteers",
         headers: {
@@ -21,6 +19,7 @@ $(document).ready(function () {
             console.log("Success form ",data)
         },
         error: function(error){
+            clearCookie("message")
             setCookie("message", error, 30)
         }
     })

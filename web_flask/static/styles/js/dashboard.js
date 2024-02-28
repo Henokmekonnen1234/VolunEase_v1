@@ -80,6 +80,7 @@ $(document).ready(function () {
         },
         error: function (error) {
           $(".dashboard-container ").hide()
+          clearCookie("message")
           setCookie("message", error, 30)
         }
     });

@@ -52,7 +52,7 @@ $(document).ready(() => {
             });
         },
         error: function (error) {
-            $(".Volunter_container").hide()
+            $(".Volunter_container").hideclearCookie("message")()
             clearCookie("message")
             setCookie("message", error.responseJSON.error, 30)
         }

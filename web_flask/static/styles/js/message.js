@@ -1,20 +1,23 @@
 $(document).ready(function(){
-    const message = getCookie("message")
+  let message = getCookie("message")
   const closeMessage = $("#messageBox")
-  console.log(typeof message)
-  if (message !== null && message !== undefined && typeof message === "string"){
+  console.log(Object.prototype.toString.call(message))
+  console.log(typeof message === "string")
+  console.log(typeof message === "object")
+  if (message !== null && message !== undefined && Object.prototype.toString.call(message) === "[object String]"){
     document.getElementById('messageBox').style.display = 'flex';
     $("#messageBox p").text(message)
-    console.log(message)
-
+    clearCookie("message")
     setTimeout(() => {
       document.getElementById('messageBox').style.display = 'none';
+      message = null
       clearCookie("message")
-    }, 10000);
+    }, 5000);
   }
 
   closeMessage.on("click", ".close-button", function(){
       document.getElementById('messageBox').style.display = 'none';
+      message = null
       clearCookie("message")
   })
 
